@@ -416,6 +416,10 @@ video {
 [hidden] {
   display: none;
 }
+
+body{
+  background: ${({ theme }) => theme.COLORS.DARK[400]}
+}
 `
 
 export default global

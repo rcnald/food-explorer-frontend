@@ -1,4 +1,4 @@
-import 'styled-components'
+import { RuleSet } from 'styled-components'
 
 type LightKeys = 100 | 200 | 300 | 400 | 500 | 600 | 700
 type DarkKeys = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950
@@ -47,6 +47,22 @@ declare module 'styled-components' {
         CARROT: CarrotProps
         MINT: MintProps
         CAKE: CakeProps
+      }
+    }
+    FONTS: {
+      ROBOTO: {
+        REGULAR: {
+          XS: RuleSet<object>
+          SM: RuleSet<object>
+          BASE: RuleSet<object>
+        }
+        BOLD: {
+          SM: RuleSet<object>
+          LG: RuleSet<object>
+          XL: RuleSet<object>
+          XL2: RuleSet<object>
+          XL3: RuleSet<object>
+        }
       }
     }
   }

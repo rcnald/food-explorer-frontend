@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components'
+import { DefaultTheme, css } from 'styled-components'
 
 const theme: DefaultTheme = {
   COLORS: {
@@ -36,7 +36,63 @@ const theme: DefaultTheme = {
       },
       CARROT: { 100: '#FBA94C' },
       MINT: { 100: '#04D361' },
-      CAKE: { 100: '#82F3FF', 200: '#065E7C' },
+      CAKE: { 100: '#065E7C', 200: '#82F3FF' },
+    },
+  },
+  FONTS: {
+    ROBOTO: {
+      REGULAR: {
+        XS: css`
+          font-family: 'Roboto', sans-serif;
+          font-size: 12px;
+          font-weight: 400;
+          line-height: 160%;
+        `,
+        SM: css`
+          font-family: 'Roboto', sans-serif;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 160%;
+        `,
+        BASE: css`
+          font-family: 'Roboto', sans-serif;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 160%;
+        `,
+      },
+      BOLD: {
+        SM: css`
+          font-family: 'Roboto', sans-serif;
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 160%;
+        `,
+        LG: css`
+          font-family: 'Roboto', sans-serif;
+          font-size: 20px;
+          font-weight: 700;
+          line-height: 160%;
+        `,
+        XL: css`
+          font-family: 'Roboto', sans-serif;
+          font-size: 24px;
+          font-weight: 700;
+          line-height: normal;
+        `,
+        XL2: css`
+          font-family: 'Roboto', sans-serif;
+          font-size: 32px;
+          font-weight: 700;
+          line-height: 160%;
+        `,
+        XL3: css`
+          font-family: 'Roboto', sans-serif;
+          font-size: 42px;
+          font-weight: 700;
+          line-height: normal;
+        `,
+      },
     },
   },
 }
