@@ -6,9 +6,9 @@ import { isEmailValid } from '../lib/utils';
 import { DataProps, HandleChangeInputParams, ValidationArrayProps, ValidationConfigProps, ValidationParams, ValidationType } from '../types';
 
 
-type LoginProps = 'email' | 'password'
+type RegisterProps = 'name' | 'email' | 'password'
 
-type LoginDataProps = DataProps<LoginProps>
+type RegisterDataProps = DataProps<RegisterProps>
 
 type HandleFormSubmitParams = (event: React.FormEvent<HTMLFormElement>) => void
 
@@ -23,22 +23,36 @@ type HandleValidationParams = (
   input: HTMLInputElement,
 ) => { message: string; value: string }
 
-type LoginValidationConfig = Pick<ValidationConfigProps, LoginProps>
+type RegisterValidationConfig = Pick<ValidationConfigProps, RegisterProps>
 
-export function useLogin() {
+export function useRegister() {
   const formRef = useRef<HTMLFormElement>(null)
-  const [data, setData] = useState<LoginDataProps>({
+  const [data, setData] = useState<RegisterDataProps>({
     user: {
+      name: '',
       email: '',
       password: '',
     },
     field: {
+      name: { message: '', valid: true },
       email: { message: '', valid: true },
       password: { message: '', valid: true },
     },
   })
 
-  const validations: LoginValidationConfig = {
+  const validations: RegisterValidationConfig = {
+    name: [
+      {
+        validation: (value) => value.replace(/\d/g, ''),
+        type: 'active',
+        errorMessage: () => '',
+      },
+      {
+        validation: (value) => value.length > 0,
+        type: 'active',
+        errorMessage: () => 'Preencha este campo',
+      },
+    ],
     email: [
       {
         validation: isEmailValid,
@@ -67,12 +81,12 @@ export function useLogin() {
       const inputs = Array.from(form.getElementsByTagName('input'))
 
       inputs.forEach((input) => {
-        const inputValidations = validations[input.id as LoginProps]
+        const inputValidations = validations[input.id as RegisterProps]
         handleChange(input, inputValidations)
       })
 
       const firstInvalidInput = inputs.find((input) => {
-        const inputValidations = validations[input.id as LoginProps]
+        const inputValidations = validations[input.id as RegisterProps]
         return !inputValidations.every((validation) =>
           validation.validation(input.value),
         )
@@ -119,7 +133,8 @@ export function useLogin() {
 
     validateInputsToUser(formRef.current)
 
-    const isInputsValid = validateInputs<LoginProps>(data, [
+    const isInputsValid = validateInputs<RegisterProps>(data, [
+      'name',
       'email',
       'password',
     ])
@@ -141,7 +156,7 @@ export function useLogin() {
       field: {
         ...prev.field,
         [id]: {
-          ...prev.field[id as LoginProps],
+          ...prev.field[id as RegisterProps],
           valid: !message,
           message,
         },

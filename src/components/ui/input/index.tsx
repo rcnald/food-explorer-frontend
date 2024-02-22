@@ -11,7 +11,7 @@ interface InputContentProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   label: string
   placeholder: string
   type: string
-  validation?: ValidationArrayProps
+  validation: ValidationArrayProps
   onChange: HandleChangeInputParams
   children?: React.ReactNode
 }
