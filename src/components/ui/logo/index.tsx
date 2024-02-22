@@ -5,13 +5,17 @@ const { FoodExplorer } = Icons
 
 interface LogoProps {
   variants?: 'neutral' | 'default'
+  isAdmin?: boolean
 }
 
-export function Logo({ variants = 'default' }: LogoProps) {
+export function Logo({ variants = 'default', isAdmin = false }: LogoProps) {
   return (
     <Styled.Div $variant={variants}>
       <FoodExplorer />
-      food explorer
+      <span>
+        food explorer
+        {isAdmin ? <span>admin</span> : null}
+      </span>
     </Styled.Div>
   )
 }

@@ -65,5 +65,8 @@ declare module 'styled-components' {
         }
       }
     }
+    BREAKPOINT: {
+      XS: string
+    }
   }
 }

@@ -95,6 +95,7 @@ const theme: DefaultTheme = {
       },
     },
   },
+  BREAKPOINT: { XS: '425px' },
 }
 
 export default theme
