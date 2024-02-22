@@ -19,6 +19,7 @@ export const Div = styled.div<{ $variant: 'default' | 'neutral' }>`
     display: flex;
     gap: 10px;
     align-items: center;
+    white-space: nowrap;
     color: ${({ theme, $variant }) =>
       $variant === 'default'
         ? theme.COLORS.LIGHT[100]

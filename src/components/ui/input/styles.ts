@@ -1,7 +1,11 @@
 import styled from 'styled-components'
 
 export const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   color: white;
+  ${({ theme }) => theme.FONTS.ROBOTO.REGULAR.BASE};
 
   > label {
     display: flex;
@@ -12,9 +16,7 @@ export const Div = styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
       background: ${({ theme }) => theme.COLORS.DARK[900]};
-      padding: 1rem;
       border-radius: 8px;
 
       &:has(input:focus) {
@@ -25,6 +27,7 @@ export const Div = styled.div`
         color: ${({ theme }) => theme.COLORS.LIGHT[100]};
         background: transparent;
         width: 100%;
+        padding: 1rem;
 
         &:focus {
           outline: none;
@@ -33,6 +36,8 @@ export const Div = styled.div`
 
       > svg {
         font-size: 30px;
+        margin-block: 1rem;
+        margin-inline-end: 1rem;
         flex-shrink: 0;
         color: ${({ theme }) => theme.COLORS.TINTS.MINT[100]};
       }
@@ -42,15 +47,16 @@ export const Div = styled.div`
   > span {
     color: ${({ theme }) => theme.COLORS.TINTS.MINT[100]};
     display: block;
-    height: 1em;
+    height: 1.6em;
   }
 
   &:has(input:invalid) {
     > label {
       > div {
+        outline: 2px solid ${({ theme }) => theme.COLORS.TINTS.TOMATO[400]};
         &:has(input:focus) {
           color: ${({ theme }) => theme.COLORS.TINTS.TOMATO[400]};
-          outline: 2px solid ${({ theme }) => theme.COLORS.TINTS.TOMATO[400]};
+          outline: 2px solid ${({ theme }) => theme.COLORS.LIGHT[500]};
         }
 
         > svg {

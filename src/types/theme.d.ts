@@ -64,9 +64,24 @@ declare module 'styled-components' {
           XL3: RuleSet<object>
         }
       }
+      POPPINS: {
+        REGULAR: {
+          XL: RuleSet<object>
+        }
+        MEDIUM: {
+          SM: RuleSet<object>
+          LG: RuleSet<object>
+          XL2: RuleSet<object>
+          XL3: RuleSet<object>
+        }
+        BOLD: {
+          LG: RuleSet<object>
+        }
+      }
     }
     BREAKPOINT: {
       XS: string
+      LG: string
     }
   }
 }

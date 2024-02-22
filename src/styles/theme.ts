@@ -94,8 +94,52 @@ const theme: DefaultTheme = {
         `,
       },
     },
+    POPPINS: {
+      REGULAR: {
+        XL: css`
+          font-family: 'Poppins', sans-serif;
+          font-size: 24px;
+          font-weight: 400;
+          line-height: 160%;
+        `,
+      },
+      MEDIUM: {
+        SM: css`
+          font-family: 'Poppins', sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 24px;
+        `,
+        LG: css`
+          font-family: 'Poppins', sans-serif;
+          font-size: 20px;
+          font-weight: 500;
+          line-height: 160%;
+        `,
+        XL2: css`
+          font-family: 'Poppins', sans-serif;
+          font-size: 32px;
+          font-weight: 500;
+          line-height: 140%;
+        `,
+        XL3: css`
+          font-family: 'Poppins', sans-serif;
+          font-size: 40px;
+          font-weight: 500;
+          line-height: 140%;
+        `,
+      },
+      BOLD: {
+        LG: css`
+          font-family: 'Poppins', sans-serif;
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 140%;
+        `,
+      },
+    },
   },
-  BREAKPOINT: { XS: '425px' },
+  BREAKPOINT: { XS: '425px', LG: '1024px' },
 }
 
 export default theme

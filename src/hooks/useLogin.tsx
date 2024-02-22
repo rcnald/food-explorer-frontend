@@ -1,5 +1,5 @@
 // eslint-disable-next-line prettier/prettier
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 // eslint-disable-next-line prettier/prettier
 import { isEmailValid } from '../lib/utils';
 // eslint-disable-next-line prettier/prettier
@@ -16,9 +16,12 @@ interface DataProps {
   }
 }
 
+type HandleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => void
+
 type LoginValidationConfig = Pick<ValidationConfigProps, 'email' | 'password'>
 
 export function useLogin() {
+  const formRef = useRef<HTMLFormElement>(null)
   const [data, setData] = useState<DataProps>({
     user: {
       email: '',
@@ -45,12 +48,47 @@ export function useLogin() {
     ],
   }
 
+  const isInputsValid =
+    data.field.email.valid &&
+    data.field.password.valid &&
+    data.user.email &&
+    data.user.password
+
+  const validateInputs = () => {
+    if (formRef.current) {
+      const inputs = Array.from(formRef.current.getElementsByTagName('input'))
+
+      inputs.forEach((input) => {
+        const inputValidations = validations[input.id as 'email' | 'password']
+        handleChange(input, inputValidations)
+      })
+
+      const firstInvalidInput = inputs.find((input) => {
+        const inputValidations = validations[input.id as 'email' | 'password']
+        return !inputValidations.every((validation) =>
+          validation.validation(input.value),
+        )
+      })
+
+      firstInvalidInput?.focus()
+    }
+  }
+
+  const handleSubmit: HandleFormSubmit = (e) => {
+    e.preventDefault()
+
+    validateInputs()
+
+    if (!isInputsValid) console.log('ruim')
+  }
+
   const handleChange: HandleChangeInputParams = (input, validations) => {
     const { id, value } = input
 
     const invalid = validations?.find(
       (validation) => !validation.validation(value),
     )
+
     input.setCustomValidity(invalid?.errorMessage(value) ?? '')
 
     setData((prev) => ({
@@ -70,5 +108,11 @@ export function useLogin() {
     }))
   }
 
-  return { data, handleChange, validations }
+  return {
+    data,
+    handleChange,
+    handleSubmit,
+    validations,
+    formRef,
+  }
 }
