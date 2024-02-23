@@ -72,6 +72,23 @@ export function SignUp() {
             </InputContent>
             <InputFeedback>{data.field.password.message}</InputFeedback>
           </Input>
+          <Input>
+            <InputContent
+              id="confirmPassword"
+              label="Confirmar senha"
+              placeholder="No mínimo 6 caracteres"
+              type="password"
+              value={data.user.confirmPassword}
+              onChange={handleChange}
+              validation={validations.confirmPassword}
+            >
+              <InputIcon
+                isValid={data.field.confirmPassword.valid}
+                icon={[LuCheck, LuXCircle]}
+              />
+            </InputContent>
+            <InputFeedback>{data.field.confirmPassword.message}</InputFeedback>
+          </Input>
         </fieldset>
 
         <Button>Criar conta</Button>

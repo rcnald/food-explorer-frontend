@@ -1,5 +1,5 @@
 import { ComponentProps } from 'react'
-import { HandleChangeInputParams, ValidationArrayProps } from '../../../types'
+import { HandleChangeInputParams, ValidationFields } from '../../../types'
 import * as Styled from './styles'
 
 interface InputProps {
@@ -11,7 +11,7 @@ interface InputContentProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   label: string
   placeholder: string
   type: string
-  validation: ValidationArrayProps
+  validation: ValidationFields
   onChange: HandleChangeInputParams
   children?: React.ReactNode
 }

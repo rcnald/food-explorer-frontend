@@ -34,7 +34,7 @@ export const Main = styled.main`
     gap: 32px;
 
     @media (min-width: ${({ theme }) => theme.BREAKPOINT.LG}) {
-      max-width: 476px;
+      max-width: 576px;
       border-radius: 16px;
       padding: 64px;
       background: ${({ theme }) => theme.COLORS.DARK[700]};
