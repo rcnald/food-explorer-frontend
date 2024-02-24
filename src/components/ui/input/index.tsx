@@ -3,15 +3,16 @@ import { HandleChangeInputParams, ValidationFields } from '../../../types'
 import * as Styled from './styles'
 
 interface InputProps {
+  color: [string, string?]
   children: React.ReactNode
 }
 
 interface InputContentProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   id: string
-  label: string
+  label?: string
   placeholder: string
   type: string
-  validation: ValidationFields
+  validation?: ValidationFields
   onChange: HandleChangeInputParams
   children?: React.ReactNode
 }
@@ -25,8 +26,8 @@ interface InputFeedbackProps {
   children: React.ReactNode
 }
 
-export function Input({ children }: InputProps) {
-  return <Styled.Div>{children}</Styled.Div>
+export function Input({ color, children }: InputProps) {
+  return <Styled.Div $color={color}>{children}</Styled.Div>
 }
 
 export function InputContent({
@@ -41,7 +42,7 @@ export function InputContent({
 }: InputContentProps) {
   return (
     <label htmlFor={id}>
-      <span>{label}</span>
+      {label}
       <div>
         <input
           id={id}

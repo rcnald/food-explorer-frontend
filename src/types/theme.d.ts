@@ -81,7 +81,11 @@ declare module 'styled-components' {
     }
     BREAKPOINT: {
       XS: string
+      MD: string
       LG: string
+    }
+    UTILS: {
+      CONTAINER: RuleSet<object>
     }
   }
 }

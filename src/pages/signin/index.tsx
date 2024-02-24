@@ -8,6 +8,7 @@ import {
 } from '../../components/ui/input'
 import { Logo } from '../../components/ui/logo'
 import { useLogin } from '../../hooks/useLogin'
+import theme from '../../styles/theme'
 import * as Styled from './styles'
 
 export function SignIn() {
@@ -20,7 +21,12 @@ export function SignIn() {
       <form ref={formRef} onSubmit={handleSubmit} noValidate>
         <fieldset>
           <legend>Faça login</legend>
-          <Input>
+          <Input
+            color={[
+              theme.COLORS.TINTS.MINT[100],
+              theme.COLORS.TINTS.TOMATO[400],
+            ]}
+          >
             <InputContent
               id="email"
               label="Email"
@@ -37,7 +43,12 @@ export function SignIn() {
             </InputContent>
             <InputFeedback>{data.field.email.message}</InputFeedback>
           </Input>
-          <Input>
+          <Input
+            color={[
+              theme.COLORS.TINTS.MINT[100],
+              theme.COLORS.TINTS.TOMATO[400],
+            ]}
+          >
             <InputContent
               id="password"
               label="Senha"

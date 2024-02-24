@@ -421,7 +421,6 @@ video {
 #root{
   display:flex;
   justify-content:center;
-  align-items:center;
   background: ${({ theme }) => theme.COLORS.DARK[400]};
   width:100%;
   min-height: 100svh;

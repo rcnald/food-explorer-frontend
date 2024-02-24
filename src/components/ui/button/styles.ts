@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
 export const Button = styled.button<{ $variant: 'default' | 'link' }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   color: ${({ theme }) => theme.COLORS.LIGHT[100]};
   background: ${(props) =>
     props.$variant === 'link'

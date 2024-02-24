@@ -32,7 +32,7 @@ export interface ValidationFields {
 
 export type HandleChangeInputParams = (
   element: HTMLInputElement,
-  validations: ValidationFields,
+  validations?: ValidationFields,
 ) => void
 
 export type HandleFormSubmitParams = (
@@ -51,6 +51,6 @@ export type ValidateByTypeParams = (
 ) => string | boolean
 
 export type HandleValidationParams = (
-  validations: ValidationFields,
   input: HTMLInputElement,
+  validations: ValidationFields,
 ) => { message: string; value: string }

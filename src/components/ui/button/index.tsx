@@ -6,6 +6,10 @@ interface ButtonProps extends ComponentProps<'button'> {
   variant?: 'default' | 'link'
 }
 
+interface ButtonIconProps {
+  icon: React.ElementType
+}
+
 export function Button({
   children,
   variant = 'default',
@@ -16,4 +20,8 @@ export function Button({
       {children}
     </Styled.Button>
   )
+}
+
+export function ButtonIcon({ icon: Icon }: ButtonIconProps) {
+  return <Icon />
 }

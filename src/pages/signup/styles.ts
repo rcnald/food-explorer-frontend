@@ -7,7 +7,7 @@ export const Main = styled.main`
   gap: 72px;
   max-width: 1100px;
   width: 100%;
-  height: min-content;
+  min-height: 100svh;
   padding: 56px;
   color: ${({ theme }) => theme.COLORS.LIGHT[100]};
 

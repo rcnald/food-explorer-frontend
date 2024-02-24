@@ -8,6 +8,7 @@ import {
 } from '../../components/ui/input'
 import { Logo } from '../../components/ui/logo'
 import { useRegister } from '../../hooks/useRegister'
+import theme from '../../styles/theme'
 import * as Styled from './styles'
 
 export function SignUp() {
@@ -21,7 +22,12 @@ export function SignUp() {
       <form ref={formRef} onSubmit={handleSubmit} noValidate>
         <fieldset>
           <legend>Crie sua conta</legend>
-          <Input>
+          <Input
+            color={[
+              theme.COLORS.TINTS.MINT[100],
+              theme.COLORS.TINTS.TOMATO[400],
+            ]}
+          >
             <InputContent
               id="name"
               label="Seu Nome"
@@ -38,7 +44,12 @@ export function SignUp() {
             </InputContent>
             <InputFeedback>{data.field.name.message}</InputFeedback>
           </Input>
-          <Input>
+          <Input
+            color={[
+              theme.COLORS.TINTS.MINT[100],
+              theme.COLORS.TINTS.TOMATO[400],
+            ]}
+          >
             <InputContent
               id="email"
               label="Email"
@@ -55,7 +66,12 @@ export function SignUp() {
             </InputContent>
             <InputFeedback>{data.field.email.message}</InputFeedback>
           </Input>
-          <Input>
+          <Input
+            color={[
+              theme.COLORS.TINTS.MINT[100],
+              theme.COLORS.TINTS.TOMATO[400],
+            ]}
+          >
             <InputContent
               id="password"
               label="Senha"
@@ -72,7 +88,12 @@ export function SignUp() {
             </InputContent>
             <InputFeedback>{data.field.password.message}</InputFeedback>
           </Input>
-          <Input>
+          <Input
+            color={[
+              theme.COLORS.TINTS.MINT[100],
+              theme.COLORS.TINTS.TOMATO[400],
+            ]}
+          >
             <InputContent
               id="confirmPassword"
               label="Confirmar senha"

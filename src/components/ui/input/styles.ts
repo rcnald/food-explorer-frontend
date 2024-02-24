@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Div = styled.div`
+export const Div = styled.div<{ $color: [string, string?] }>`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -39,13 +39,13 @@ export const Div = styled.div`
         margin-block: 1rem;
         margin-inline-end: 1rem;
         flex-shrink: 0;
-        color: ${({ theme }) => theme.COLORS.TINTS.MINT[100]};
+        color: ${(props) => props.$color[0]};
       }
     }
   }
 
   > span {
-    color: ${({ theme }) => theme.COLORS.TINTS.MINT[100]};
+    color: ${(props) => props.$color[0]};
     display: block;
     height: 1.6em;
   }
@@ -53,20 +53,20 @@ export const Div = styled.div`
   &:has(input:invalid) {
     > label {
       > div {
-        outline: 2px solid ${({ theme }) => theme.COLORS.TINTS.TOMATO[400]};
+        outline: 2px solid ${(props) => props.$color[1]};
         &:has(input:focus) {
-          color: ${({ theme }) => theme.COLORS.TINTS.TOMATO[400]};
+          color: ${(props) => props.$color[1]};
           outline: 2px solid ${({ theme }) => theme.COLORS.LIGHT[500]};
         }
 
         > svg {
-          color: ${({ theme }) => theme.COLORS.TINTS.TOMATO[400]};
+          color: ${(props) => props.$color[1]};
         }
       }
     }
 
     > span {
-      color: ${({ theme }) => theme.COLORS.TINTS.TOMATO[400]};
+      color: ${(props) => props.$color[1]};
     }
   }
 `
