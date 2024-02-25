@@ -74,6 +74,7 @@ export const Container = styled.div`
       @media (min-width: ${({ theme }) => theme.BREAKPOINT.MD}) {
         display: flex;
         width: 100%;
+        background: transparent;
       }
     }
 
@@ -102,9 +103,11 @@ export const Container = styled.div`
     width: 100%;
 
     @media (max-width: ${({ theme }) => theme.BREAKPOINT.MD}) {
+      background: ${({ theme }) => theme.COLORS.DARK[400]};
       position: absolute;
+      z-index: 10;
       padding-block: 32px;
-      border-bottom: 1px solid ${({ theme }) => theme.COLORS.DARK[950]};
+
       top: 100%;
       left: 0;
 
@@ -113,6 +116,12 @@ export const Container = styled.div`
         gap: 32px;
         flex-direction: column;
         align-items: start;
+
+        > *:not(:first-child) {
+          border-bottom: 1px solid ${({ theme }) => theme.COLORS.DARK[950]};
+          width: 100%;
+          justify-content: start;
+        }
 
         ${({ theme }) => theme.UTILS.CONTAINER}
 

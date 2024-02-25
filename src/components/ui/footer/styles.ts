@@ -5,6 +5,7 @@ export const Footer = styled.footer`
   background: ${({ theme }) => theme.COLORS.DARK[600]};
   padding-block: 26px;
   display: flex;
+  width: 100%;
   justify-content: center;
   margin-top: auto;
 

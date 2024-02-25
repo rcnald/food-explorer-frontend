@@ -11,7 +11,7 @@ export const Button = styled.button<{ $variant: 'default' | 'link' }>`
       ? 'transparent'
       : props.theme.COLORS.TINTS.TOMATO[100]};
   width: ${(props) => (props.$variant === 'link' ? 'fit-content' : '100%')};
-  border-radius: 5px;
+  border-radius: ${(props) => (props.$variant === 'link' ? '0px' : '5px')};
   padding-block: ${(props) => (props.$variant === 'link' ? '0px' : '12px')};
   transition: 0.2s ease;
 
