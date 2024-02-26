@@ -5,7 +5,7 @@ export const Hero = styled.section`
   grid-template-rows: 30px 1fr;
   grid-template-columns: 30px 145px 1fr;
   color: ${({ theme }) => theme.COLORS.LIGHT[100]};
-  height: 150px;
+  min-height: 150px;
 
   ${({ theme }) => theme.UTILS.CONTAINER};
 
