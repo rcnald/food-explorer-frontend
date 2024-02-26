@@ -9,7 +9,7 @@ interface CardChildrenProps {
 }
 
 interface Card extends ComponentProps<'article'> {
-  onClick: (event: React.MouseEvent<HTMLElement>) => void
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void
   children: React.ReactNode
 }
 
@@ -21,6 +21,10 @@ interface CardImage extends ComponentProps<'img'> {
 interface CardAction {
   isToggle?: boolean
   icons: { regular: React.ElementType; toggled?: React.ElementType }
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void
+}
+
+interface CardControls {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void
 }
 
@@ -51,7 +55,7 @@ export function CardPrice({ children }: CardChildrenProps) {
   return <span>R$ {children}</span>
 }
 
-export function CardControls() {
+export function CardControls({ onClick }: CardControls) {
   const [count, setCount] = useState(0)
   return (
     <div>
@@ -64,7 +68,7 @@ export function CardControls() {
           <FaPlus />
         </button>
       </div>
-      <Button>incluir</Button>
+      <Button onClick={onClick}>incluir</Button>
     </div>
   )
 }
