@@ -1,6 +1,6 @@
 import { RuleSet } from 'styled-components'
 
-type LightKeys = 100 | 200 | 300 | 400 | 500 | 600 | 700
+type LightKeys = 100.5 | 100 | 200 | 300 | 400 | 500 | 600 | 700
 type DarkKeys = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900 | 950
 type GradientKeys = 100 | 200
 type TomatoKeys = 100 | 200 | 300 | 400

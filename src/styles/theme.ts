@@ -3,6 +3,7 @@ import { DefaultTheme, css } from 'styled-components'
 const theme: DefaultTheme = {
   COLORS: {
     LIGHT: {
+      100.5: 'rgba(255,255,255,.2)',
       100: '#FFFFFF',
       200: '#FFFAF1',
       300: '#E1E1E6',
@@ -24,7 +25,7 @@ const theme: DefaultTheme = {
       950: '#192227',
     },
     GRADIENTS: {
-      100: '90deg, rgba(0,10,15,0.275) 0%, rgba(0,10,15,1) 100%',
+      100: '90deg, rgba(0,10,15,0) 0%, rgba(0,10,15,1) 100%',
       200: '90deg, rgba(9,30,38,1) 0%, rgba(0,19,28,1) 100%',
     },
     TINTS: {
@@ -142,7 +143,7 @@ const theme: DefaultTheme = {
   BREAKPOINT: { XS: '425px', MD: '768px', LG: '1024px' },
   UTILS: {
     CONTAINER: css`
-      max-width: 1100px;
+      max-width: 1160px;
       width: 100%;
       padding: 0px 28px;
     `,

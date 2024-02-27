@@ -20,6 +20,7 @@ export const Card = styled.article`
   > button {
     color: ${({ theme }) => theme.COLORS.LIGHT[100]};
     position: absolute;
+    font-size: 24px;
     top: 16px;
     right: 16px;
   }
