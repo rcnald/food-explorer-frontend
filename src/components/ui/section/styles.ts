@@ -25,7 +25,7 @@ export const Section = styled.section`
       &::after,
       &::before {
         content: '';
-        display: block;
+        display: none;
         position: absolute;
         width: 25%;
         height: 100%;
@@ -34,6 +34,10 @@ export const Section = styled.section`
         );
         pointer-events: none;
         z-index: 1;
+
+        @media (min-width: ${({ theme }) => theme.BREAKPOINT.LG}) {
+          display: block;
+        }
       }
 
       &::after {
@@ -49,6 +53,21 @@ export const Section = styled.section`
         display: flex;
         gap: 26px;
         overflow-x: auto;
+
+        &::-webkit-scrollbar {
+          height: 8px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background-color: ${({ theme }) => theme.COLORS.LIGHT[700]};
+          border-radius: 6px;
+        }
+
+        &::-webkit-scrollbar-track,
+        &::-webkit-scrollbar-corner,
+        &::-webkit-scrollbar-button {
+          background-color: transparent;
+        }
 
         @media (min-width: ${({ theme }) => theme.BREAKPOINT.LG}) {
           overflow-x: hidden;
@@ -89,3 +108,4 @@ export const Section = styled.section`
     }
   }
 `
+/* Estilizando a barra de rolagem */

@@ -64,6 +64,7 @@ export const Card = styled.article`
   > div {
     display: flex;
     flex-direction: column;
+
     gap: 24px;
 
     @media (min-width: ${({ theme }) => theme.BREAKPOINT.MD}) {

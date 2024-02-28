@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ThemeProvider } from 'styled-components'
 import { composeProviders } from './lib/utils'
-import { Home } from './pages/home'
+import { Dish } from './pages/dish'
 import Global from './styles/global'
 import theme from './styles/theme'
 
@@ -12,7 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Providers>
       <Global />
-      <Home />
+      <Dish />
     </Providers>
   </React.StrictMode>,
 )

@@ -25,102 +25,322 @@ export function Home() {
       <Header />
       <Hero />
 
-      <Section>
-        <SectionTitle>Refeições</SectionTitle>
-        <SectionSlider slidesPerView={3}>
-          <Card>
-            <CardAction
-              isToggle={true}
-              icons={{ regular: FaRegHeart, toggled: FaHeart }}
-            />
-            <CardImage src={image} alt="DADA" />
-            <CardTitle>Torradas de Parma </CardTitle>
-            <CardDescription>
-              Presunto de parma e rúcula em um pão com fermentação natural.
-            </CardDescription>
-            <CardPrice>25.97</CardPrice>
-            <CardControls />
-          </Card>
-          <Card>
-            <CardAction
-              isToggle={true}
-              icons={{ regular: FaRegHeart, toggled: FaHeart }}
-            />
-            <CardImage src={image} alt="DADA" />
-            <CardTitle>Torradas de Parma </CardTitle>
-            <CardDescription>
-              Presunto de parma e rúcula em um pão com fermentação natural.
-            </CardDescription>
-            <CardPrice>25.97</CardPrice>
-            <CardControls />
-          </Card>
-          <Card>
-            <CardAction
-              isToggle={true}
-              icons={{ regular: FaRegHeart, toggled: FaHeart }}
-            />
-            <CardImage src={image} alt="DADA" />
-            <CardTitle>Torradas de Parma </CardTitle>
-            <CardDescription>
-              Presunto de parma e rúcula em um pão com fermentação natural.
-            </CardDescription>
-            <CardPrice>25.97</CardPrice>
-            <CardControls />
-          </Card>
-          <Card>
-            <CardAction
-              isToggle={true}
-              icons={{ regular: FaRegHeart, toggled: FaHeart }}
-            />
-            <CardImage src={image} alt="DADA" />
-            <CardTitle>Torradas de Parma </CardTitle>
-            <CardDescription>
-              Presunto de parma e rúcula em um pão com fermentação natural.
-            </CardDescription>
-            <CardPrice>25.97</CardPrice>
-            <CardControls />
-          </Card>
-          <Card>
-            <CardAction
-              isToggle={true}
-              icons={{ regular: FaRegHeart, toggled: FaHeart }}
-            />
-            <CardImage src={image} alt="DADA" />
-            <CardTitle>Torradas de Parma </CardTitle>
-            <CardDescription>
-              Presunto de parma e rúcula em um pão com fermentação natural.
-            </CardDescription>
-            <CardPrice>25.97</CardPrice>
-            <CardControls />
-          </Card>
-          <Card>
-            <CardAction
-              isToggle={true}
-              icons={{ regular: FaRegHeart, toggled: FaHeart }}
-            />
-            <CardImage src={image} alt="DADA" />
-            <CardTitle>Torradas de Parma </CardTitle>
-            <CardDescription>
-              Presunto de parma e rúcula em um pão com fermentação natural.
-            </CardDescription>
-            <CardPrice>25.97</CardPrice>
-            <CardControls />
-          </Card>
-          <Card>
-            <CardAction
-              isToggle={true}
-              icons={{ regular: FaRegHeart, toggled: FaHeart }}
-            />
-            <CardImage src={image} alt="DADA" />
-            <CardTitle>Torradas de Parma </CardTitle>
-            <CardDescription>
-              Presunto de parma e rúcula em um pão com fermentação natural.
-            </CardDescription>
-            <CardPrice>25.97</CardPrice>
-            <CardControls />
-          </Card>
-        </SectionSlider>
-      </Section>
+      <main>
+        <Section>
+          <SectionTitle>Refeições</SectionTitle>
+          <SectionSlider slidesPerView={3}>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+          </SectionSlider>
+        </Section>
+        <Section>
+          <SectionTitle>Sobremesas</SectionTitle>
+          <SectionSlider slidesPerView={3}>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+          </SectionSlider>
+        </Section>
+        <Section>
+          <SectionTitle>Bebidas</SectionTitle>
+          <SectionSlider slidesPerView={3}>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+            <Card>
+              <CardAction
+                isToggle={true}
+                icons={{ regular: FaRegHeart, toggled: FaHeart }}
+              />
+              <CardImage src={image} alt="DADA" />
+              <CardTitle>Torradas de Parma </CardTitle>
+              <CardDescription>
+                Presunto de parma e rúcula em um pão com fermentação natural.
+              </CardDescription>
+              <CardPrice>25.97</CardPrice>
+              <CardControls />
+            </Card>
+          </SectionSlider>
+        </Section>
+      </main>
       <Footer />
     </Styled.Home>
   )
