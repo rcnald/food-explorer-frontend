@@ -52,5 +52,5 @@ export type ValidateByTypeParams = (
 
 export type HandleValidationParams = (
   input: HTMLInputElement,
-  validations: ValidationFields,
+  validations?: ValidationFields,
 ) => { message: string; value: string }

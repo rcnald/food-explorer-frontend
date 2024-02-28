@@ -56,25 +56,27 @@ export function useForm<T extends string>(
     }
   }
 
-  const handleValidation: HandleValidationParams = (config, input) => {
+  const handleValidation: HandleValidationParams = (input, config) => {
     let { value } = input
     let message = ''
 
-    const { validations, compareField } = config
+    if (config) {
+      const { validations, compareField } = config
 
-    validations.forEach((validation) => {
-      const result = validateByType(
-        validation.type,
-        validation.validation,
-        value,
-        data.user[compareField as T],
-      )
+      validations.forEach((validation) => {
+        const result = validateByType(
+          validation.type,
+          validation.validation,
+          value,
+          data.user[compareField as T],
+        )
 
-      if (typeof result === 'string') value = result
-      if (result === false) message = validation.errorMessage()
+        if (typeof result === 'string') value = result
+        if (result === false) message = validation.errorMessage()
 
-      input.setCustomValidity(message)
-    })
+        input.setCustomValidity(message)
+      })
+    }
 
     return { message, value }
   }
@@ -92,7 +94,7 @@ export function useForm<T extends string>(
   const handleChange: HandleChangeInputParams = (input, validations) => {
     const { id, value } = input
 
-    const { message, value: validValue } = handleValidation(validations, input)
+    const { message, value: validValue } = handleValidation(input, validations)
 
     setData((prev) => ({
       ...prev,
