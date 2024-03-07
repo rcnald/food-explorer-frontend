@@ -19,15 +19,15 @@ export const Div = styled.div<{ $color: [string, string?] }>`
       background: ${({ theme }) => theme.COLORS.DARK[900]};
       border-radius: 8px;
 
-      &:has(input:focus) {
+      &:has(textarea:focus) {
         outline: 2px solid ${({ theme }) => theme.COLORS.LIGHT[500]};
       }
 
-      > input {
+      > textarea {
         color: ${({ theme }) => theme.COLORS.LIGHT[100]};
         background: transparent;
         width: 100%;
-        padding: 12px;
+        padding: 0.5rem;
 
         &:focus {
           outline: none;
@@ -50,11 +50,11 @@ export const Div = styled.div<{ $color: [string, string?] }>`
     height: 1.6em;
   }
 
-  &:has(input:invalid) {
+  &:has(textarea:invalid) {
     > label {
       > div {
         outline: 2px solid ${(props) => props.$color[1]};
-        &:has(input:focus) {
+        &:has(textarea:focus) {
           color: ${(props) => props.$color[1]};
           outline: 2px solid ${({ theme }) => theme.COLORS.LIGHT[500]};
         }

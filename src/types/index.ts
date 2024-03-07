@@ -6,6 +6,12 @@ export type FieldState = {
 export interface DataProps<T extends string> {
   user: Record<T, string>
   field: Record<T, FieldState>
+  image?: FileList | null
+}
+
+export interface InputState {
+  success: boolean | undefined
+  message: string
 }
 
 export type ValidationParams = (
@@ -27,11 +33,11 @@ export interface ValidationConfigProps {
 }
 export interface ValidationFields {
   validations: Array<ValidationProps>
-  compareField?: string // Field to compare with
+  compareField?: string
 }
 
 export type HandleChangeInputParams = (
-  element: HTMLInputElement,
+  element: HTMLInputElement | HTMLTextAreaElement,
   validations?: ValidationFields,
 ) => void
 
@@ -51,6 +57,6 @@ export type ValidateByTypeParams = (
 ) => string | boolean
 
 export type HandleValidationParams = (
-  input: HTMLInputElement,
+  input: HTMLInputElement | HTMLTextAreaElement,
   validations?: ValidationFields,
 ) => { message: string; value: string }

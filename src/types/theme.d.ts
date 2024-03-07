@@ -86,6 +86,7 @@ declare module 'styled-components' {
     }
     UTILS: {
       CONTAINER: RuleSet<object>
+      SRONLY: RuleSet<object>
     }
   }
 }

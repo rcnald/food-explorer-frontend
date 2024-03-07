@@ -23,20 +23,40 @@ export function useForm<T extends string>(
   const validateInputsToUser = (form: HTMLFormElement | null) => {
     if (form) {
       const inputs = Array.from(form.getElementsByTagName('input'))
+      const textareas = Array.from(form.getElementsByTagName('textarea'))
 
       inputs.forEach((input) => {
         const inputValidations = validations[input.id as T]
         handleChange(input, inputValidations)
       })
 
+      textareas.forEach((textarea) => {
+        const inputValidations = validations[textarea.id as T]
+        handleChange(textarea, inputValidations)
+      })
+
       const firstInvalidInput = inputs.find((input) => {
-        const inputValidations = validations[input.id as T]
+        if (input.id) {
+          const inputValidations = validations[input.id as T]
+          return !inputValidations.validations.every((validation) =>
+            validation.validation(input.value),
+          )
+        }
+        return null
+      })
+
+      const firstInvalidTextarea = textareas.find((textarea) => {
+        const inputValidations = validations[textarea.id as T]
         return !inputValidations.validations.every((validation) =>
-          validation.validation(input.value),
+          validation.validation(textarea.value),
         )
       })
 
-      firstInvalidInput?.focus()
+      if (firstInvalidInput) {
+        firstInvalidInput?.focus()
+      } else {
+        firstInvalidTextarea?.focus()
+      }
     }
   }
 
@@ -81,6 +101,18 @@ export function useForm<T extends string>(
     return { message, value }
   }
 
+  const handleFileValidation: HandleValidationParams = (input) => {
+    const { files } = input as HTMLInputElement
+    const value = ''
+    let message = ''
+
+    if (!files) {
+      message = 'Adicione uma foto'
+    }
+
+    return { message, value }
+  }
+
   const handleSubmit: HandleFormSubmitParams = (e) => {
     e.preventDefault()
 
@@ -113,9 +145,30 @@ export function useForm<T extends string>(
     }))
   }
 
+  const handleFileChange: HandleChangeInputParams = (input) => {
+    const { files } = input as HTMLInputElement
+    const id = 'image'
+
+    const { message } = handleFileValidation(input)
+
+    setData((prev) => ({
+      ...prev,
+      image: files,
+      field: {
+        ...prev.field,
+        image: {
+          ...prev.field[id as T],
+          valid: !message,
+          message,
+        },
+      },
+    }))
+  }
+
   return {
     data,
     handleChange,
+    handleFileChange,
     handleSubmit,
     validations,
     formRef,

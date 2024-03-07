@@ -147,6 +147,17 @@ const theme: DefaultTheme = {
       width: 100%;
       padding: 0px 28px;
     `,
+    SRONLY: css`
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    `,
   },
 }
 

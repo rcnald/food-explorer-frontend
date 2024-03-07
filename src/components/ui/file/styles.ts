@@ -18,34 +18,37 @@ export const Div = styled.div<{ $color: [string, string?] }>`
       justify-content: space-between;
       background: ${({ theme }) => theme.COLORS.DARK[900]};
       border-radius: 8px;
+      transition: 0.3s ease-in;
+      padding: 8px;
+      cursor: pointer;
 
-      &:has(input:focus) {
+      &:has(input:focus),
+      &:hover {
         outline: 2px solid ${({ theme }) => theme.COLORS.LIGHT[500]};
       }
 
       > input {
-        color: ${({ theme }) => theme.COLORS.LIGHT[100]};
-        background: transparent;
-        width: 100%;
-        padding: 12px;
+        ${({ theme }) => theme.UTILS.SRONLY}
 
         &:focus {
           outline: none;
         }
       }
 
-      > svg {
-        font-size: 30px;
-        margin-block: 0.5rem;
-        margin-inline-end: 0.5rem;
-        flex-shrink: 0;
-        color: ${(props) => props.$color[0]};
+      > div {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        > svg {
+          font-size: 30px;
+          flex-shrink: 0;
+        }
       }
     }
   }
 
   > span {
-    color: ${(props) => props.$color[0]};
     display: block;
     height: 1.6em;
   }
@@ -55,7 +58,6 @@ export const Div = styled.div<{ $color: [string, string?] }>`
       > div {
         outline: 2px solid ${(props) => props.$color[1]};
         &:has(input:focus) {
-          color: ${(props) => props.$color[1]};
           outline: 2px solid ${({ theme }) => theme.COLORS.LIGHT[500]};
         }
 
