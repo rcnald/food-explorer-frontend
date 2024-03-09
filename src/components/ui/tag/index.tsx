@@ -1,5 +1,5 @@
 import { ChangeEventHandler, MouseEventHandler } from 'react'
-import { LuPlus } from 'react-icons/lu'
+import { LuPlus, LuX } from 'react-icons/lu'
 import * as Styled from './styles'
 
 interface TagProps {
@@ -30,7 +30,10 @@ export function Tag({
           <LuPlus onClick={onClick} />
         </>
       ) : (
-        children
+        <>
+          {children}
+          <LuX onClick={onClick} />
+        </>
       )}
     </Styled.Tag>
   )

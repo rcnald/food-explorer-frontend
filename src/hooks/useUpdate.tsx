@@ -3,22 +3,11 @@ import { useForm } from './useForm'
 
 type InsertProps = 'name' | 'price' | 'description' | 'image'
 
-export function useInsert() {
-  const initialData: DataProps<InsertProps> = {
-    user: {
-      name: '',
-      description: '',
-      price: 'R$ 0,00',
-      image: '',
-    },
-    field: {
-      name: { message: '', valid: true },
-      description: { message: '', valid: true },
-      price: { message: '', valid: true },
-      image: { message: '', valid: true },
-    },
-  }
-
+export function useUpdate(data: {
+  name: string
+  description: string
+  price: string
+}) {
   const formatPrice = (value: string) => {
     const digits = value.replace(/\D/g, '')
 
@@ -28,6 +17,21 @@ export function useInsert() {
     })
 
     return formatoMoeda.format(Number(digits) / 100)
+  }
+
+  const initialData: DataProps<InsertProps> = {
+    user: {
+      name: data.name ?? '',
+      description: data.description ?? '',
+      price: formatPrice(data.price ?? '0'),
+      image: '',
+    },
+    field: {
+      name: { message: '', valid: true },
+      description: { message: '', valid: true },
+      price: { message: '', valid: true },
+      image: { message: '', valid: true },
+    },
   }
 
   const validations: ValidationConfig<InsertProps | 'image'> = {
@@ -81,7 +85,7 @@ export function useInsert() {
     image: {
       validations: [
         {
-          validation: (files) => files.length > 0,
+          validation: (files) => files.length >= 0,
           type: 'passive',
           errorMessage: () => 'Adicione uma foto',
         },

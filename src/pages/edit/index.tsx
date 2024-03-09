@@ -18,11 +18,11 @@ import {
   TextareaContent,
   TextareaFeedback,
 } from '../../components/ui/textarea'
-import { useInsert } from '../../hooks/useInsert'
+import { useUpdate } from '../../hooks/useUpdate'
 import theme from '../../styles/theme'
 import * as Styled from './styles'
 
-export function Add() {
+export function Edit() {
   const {
     data,
     handleChange,
@@ -30,7 +30,7 @@ export function Add() {
     handleFileChange,
     validations,
     formRef,
-  } = useInsert()
+  } = useUpdate({ name: 'rogi', description: 'dada', price: '34343' })
   const [select, setSelect] = useState('')
   const [ingredients, setIngredients] = useState<Array<string>>([])
   const [ingredientsValue, setIngredientsValue] = useState<string>('')
@@ -165,7 +165,10 @@ export function Add() {
               </TextareaFeedback>
             </Textarea>
           </fieldset>
-          <Button>Salvar alterações</Button>
+          <div>
+            <Button type="button">Excluir</Button>
+            <Button type="submit">Salvar alterações</Button>
+          </div>
         </form>
       </main>
       <Footer />
