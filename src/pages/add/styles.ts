@@ -47,9 +47,6 @@ export const Add = styled.div`
             width: 100%;
           }
 
-          &:nth-of-type(2) {
-            align-items: end;
-          }
           &:nth-of-type(3) {
             gap: 8px;
           }

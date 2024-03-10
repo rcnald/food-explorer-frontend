@@ -1,4 +1,4 @@
-import { LuChevronLeft, LuUpload } from 'react-icons/lu'
+import { LuChevronLeft, LuPlus, LuUpload, LuX } from 'react-icons/lu'
 import { Button, ButtonIcon } from '../../components/ui/button'
 import {
   File,
@@ -9,10 +9,9 @@ import {
 import { Footer } from '../../components/ui/footer'
 import { Header } from '../../components/ui/header'
 
-import { useState } from 'react'
 import { Input, InputContent, InputFeedback } from '../../components/ui/input'
 import { Select } from '../../components/ui/select'
-import { Tag } from '../../components/ui/tag'
+import { Tag, TagIcon } from '../../components/ui/tag'
 import {
   Textarea,
   TextareaContent,
@@ -24,25 +23,33 @@ import * as Styled from './styles'
 
 export function Add() {
   const {
+    form,
+    handleAddIngredients,
+    handleRemoveIngredients,
+    handleIngredientChange,
+    ingredientsValue,
+    ingredients,
+    setSelect,
+  } = useInsert()
+
+  const {
     data,
     handleChange,
     handleSubmit,
     handleFileChange,
     validations,
     formRef,
-  } = useInsert()
-  const [select, setSelect] = useState('')
-  const [ingredients, setIngredients] = useState<Array<string>>([])
-  const [ingredientsValue, setIngredientsValue] = useState<string>('')
+  } = form
 
-  console.log(select)
+  const filePlaceHolder =
+    data.image && data.image[0] ? data.image[0].name : 'Selecione imagem'
 
   return (
     <Styled.Add>
       <Header />
       <main>
         <Button variant="link">
-          <ButtonIcon icon={LuChevronLeft}></ButtonIcon>
+          <ButtonIcon icon={LuChevronLeft} />
           Voltar
         </Button>
 
@@ -59,14 +66,10 @@ export function Add() {
                 <FileContent
                   id="image"
                   label="Imagem do prato"
-                  placeholder={
-                    data.image && data.image[0]
-                      ? data.image[0].name
-                      : 'Selecione imagem'
-                  }
+                  placeholder={filePlaceHolder}
                   onChange={(e) => handleFileChange(e.target)}
                 >
-                  <FileIcon icon={LuUpload}></FileIcon>
+                  <FileIcon icon={LuUpload} />
                 </FileContent>
                 <FileFeedback>{data.field.image.message}</FileFeedback>
               </File>
@@ -85,7 +88,7 @@ export function Add() {
                   value={data.user.name}
                   validation={validations.name}
                   onChange={handleChange}
-                ></InputContent>
+                />
                 <InputFeedback>{data.field.name.message}</InputFeedback>
               </Input>
 
@@ -100,31 +103,21 @@ export function Add() {
                 <span>Ingredientes</span>
                 <div>
                   {ingredients.map((ingredient, i) => (
-                    <Tag
-                      variant="light"
-                      key={i}
-                      onClick={() =>
-                        setIngredients(
-                          ingredients.filter((_, index) => index !== i),
-                        )
-                      }
-                    >
+                    <Tag variant="light" key={i}>
                       {ingredient}
+                      <TagIcon
+                        icon={LuX}
+                        onClick={() => handleRemoveIngredients(i)}
+                      />
                     </Tag>
                   ))}
                   <Tag
                     value={ingredientsValue}
-                    onChange={(e) => setIngredientsValue(e.target.value)}
-                    onClick={() => {
-                      setIngredients(
-                        ingredientsValue
-                          ? [...ingredients, ingredientsValue]
-                          : [...ingredients],
-                      )
-                      setIngredientsValue('')
-                    }}
+                    onChange={handleIngredientChange}
                     variant="outline"
-                  ></Tag>
+                  >
+                    <TagIcon icon={LuPlus} onClick={handleAddIngredients} />
+                  </Tag>
                 </div>
               </Styled.Tags>
 
@@ -142,7 +135,8 @@ export function Add() {
                   value={data.user.price}
                   validation={validations.price}
                   onChange={handleChange}
-                ></InputContent>
+                />
+                <InputFeedback>{data.field.price.message}</InputFeedback>
               </Input>
             </div>
             <Textarea

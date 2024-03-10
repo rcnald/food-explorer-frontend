@@ -10,7 +10,16 @@ import { Tag } from '../../components/ui/tag'
 import * as Styled from './styles'
 
 export function Dish() {
-  const [count, setCount] = useState(0)
+  const [amount, setAmount] = useState(0)
+
+  const handleIncrement = () => {
+    setAmount((prev) => ++prev)
+  }
+
+  const handleDecrement = () => {
+    setAmount((prev) => (prev > 0 ? --prev : 0))
+  }
+
   return (
     <Styled.Dish>
       <Header />
@@ -33,13 +42,11 @@ export function Dish() {
             </ul>
             <div>
               <div>
-                <button
-                  onClick={() => setCount((prev) => (prev > 0 ? --prev : 0))}
-                >
+                <button onClick={handleDecrement}>
                   <FaMinus />
                 </button>
-                <span>{count.toString().padStart(2, '0')}</span>
-                <button onClick={() => setCount((prev) => ++prev)}>
+                <span>{amount.toString().padStart(2, '0')}</span>
+                <button onClick={handleIncrement}>
                   <FaPlus />
                 </button>
               </div>

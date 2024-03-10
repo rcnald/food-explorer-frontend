@@ -1,19 +1,20 @@
-import { ChangeEventHandler, MouseEventHandler } from 'react'
-import { LuPlus, LuX } from 'react-icons/lu'
+import { ChangeEventHandler, ComponentProps } from 'react'
 import * as Styled from './styles'
 
 interface TagProps {
   variant?: 'default' | 'light' | 'outline'
   children?: React.ReactNode
-  onClick?: MouseEventHandler<SVGElement> | undefined
   onChange?: ChangeEventHandler<HTMLInputElement> | undefined
   value?: string
+}
+
+interface TagIconProps extends ComponentProps<'svg'> {
+  icon: React.ElementType
 }
 
 export function Tag({
   variant = 'default',
   onChange,
-  onClick,
   value,
   children,
 }: TagProps) {
@@ -27,14 +28,15 @@ export function Tag({
             onChange={onChange}
             value={value}
           />
-          <LuPlus onClick={onClick} />
+          {children}
         </>
       ) : (
-        <>
-          {children}
-          <LuX onClick={onClick} />
-        </>
+        <>{children}</>
       )}
     </Styled.Tag>
   )
+}
+
+export function TagIcon({ icon: Icon, onClick }: TagIconProps) {
+  return <Icon onClick={onClick} />
 }

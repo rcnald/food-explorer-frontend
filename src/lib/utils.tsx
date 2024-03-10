@@ -30,3 +30,24 @@ export const isEmailValid = (email: string) => {
 
   return emailRegex.test(email)
 }
+
+export const formatCentsToCurrency = (value: number) => {
+  value *= 100
+  const currency = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  })
+
+  return currency.format(value)
+}
+
+export const formatToCurrency = (value: string) => {
+  const digits = value.replace(/\D/g, '')
+
+  const currency = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  })
+
+  return currency.format(Number(digits) / 100)
+}

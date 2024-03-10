@@ -1,14 +1,28 @@
+import { useState } from 'react'
+import { formatToCurrency } from '../lib/utils'
 import { DataProps, ValidationConfig } from '../types'
 import { useForm } from './useForm'
 
 type InsertProps = 'name' | 'price' | 'description' | 'image'
 
-export function useInsert() {
+interface UseInsertProps {
+  name: string
+  description: string
+  price: string
+}
+
+export function useInsert(data?: UseInsertProps) {
+  const [select, setSelect] = useState('')
+  const [ingredients, setIngredients] = useState<Array<string>>([])
+  const [ingredientsValue, setIngredientsValue] = useState<string>('')
+
+  console.log(select)
+
   const initialData: DataProps<InsertProps> = {
     user: {
-      name: '',
-      description: '',
-      price: 'R$ 0,00',
+      name: data?.name ?? '',
+      description: data?.description ?? '',
+      price: formatToCurrency(data?.price ?? '0'),
       image: '',
     },
     field: {
@@ -17,17 +31,6 @@ export function useInsert() {
       price: { message: '', valid: true },
       image: { message: '', valid: true },
     },
-  }
-
-  const formatPrice = (value: string) => {
-    const digits = value.replace(/\D/g, '')
-
-    const formatoMoeda = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    })
-
-    return formatoMoeda.format(Number(digits) / 100)
   }
 
   const validations: ValidationConfig<InsertProps | 'image'> = {
@@ -67,12 +70,12 @@ export function useInsert() {
           errorMessage: () => '',
         },
         {
-          validation: (value) => value.length > 0,
+          validation: (value) => Number(value.replace(/\D/g, '')) > 0,
           type: 'passive',
           errorMessage: () => 'Preencha este campo',
         },
         {
-          validation: formatPrice,
+          validation: formatToCurrency,
           type: 'active',
           errorMessage: () => '',
         },
@@ -89,7 +92,35 @@ export function useInsert() {
     },
   }
 
-  const validateFields: Array<InsertProps> = ['name', 'name', 'description']
+  const validateFields: Array<InsertProps> = ['name', 'price', 'description']
 
-  return useForm(initialData, validations, validateFields)
+  // const filePlaceHolder =
+  //   data.image && data.image[0] ? data.image[0].name : 'Selecione imagem'
+
+  const handleIngredientChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIngredientsValue(e.target.value)
+  }
+
+  const handleRemoveIngredients = (i: number) => {
+    setIngredients(ingredients.filter((_, index) => index !== i))
+  }
+
+  const handleAddIngredients = () => {
+    setIngredients(
+      ingredientsValue ? [...ingredients, ingredientsValue] : [...ingredients],
+    )
+    setIngredientsValue('')
+  }
+
+  const form = useForm(initialData, validations, validateFields)
+
+  return {
+    form,
+    handleRemoveIngredients,
+    handleAddIngredients,
+    handleIngredientChange,
+    ingredientsValue,
+    setSelect,
+    ingredients,
+  }
 }
