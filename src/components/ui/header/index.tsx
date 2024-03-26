@@ -9,7 +9,12 @@ import { Input, InputContent, InputIcon } from '../input'
 import { Logo } from '../logo'
 import * as Styled from './styles.ts'
 
-export function Header() {
+interface HeaderProps {
+  onChange: (e: HTMLInputElement | HTMLTextAreaElement) => void
+  value: string
+}
+
+export function Header({ onChange, value }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
     <Styled.Header>
@@ -27,7 +32,8 @@ export function Header() {
                 id="search"
                 placeholder="Busque por pratos ou ingredientes"
                 type="text"
-                onChange={() => console.log('change')}
+                value={value}
+                onChange={onChange}
               >
                 <InputIcon isValid={true} icon={[LuSearch]}></InputIcon>
               </InputContent>

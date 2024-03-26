@@ -6,21 +6,22 @@ interface SlideProps {
 }
 
 export function useSlide({ slidesPerView, children }: SlideProps) {
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const [currentIndex, setCurrentIndex] = useState<number | null>(null)
+
   const sliderRef = useRef<HTMLDivElement>(null)
   const totalSlides =
     Children.count(children) -
     (Children.count(children) >= slidesPerView ? slidesPerView - 1 : 0)
 
   const handleClickNext = () => {
-    setCurrentIndex((prevIndex) => prevIndex + 1)
+    setCurrentIndex((prevIndex) => (prevIndex ?? 0) + 1)
   }
 
   const handleClickPrev = () => {
-    setCurrentIndex((prevIndex) => prevIndex - 1)
+    setCurrentIndex((prevIndex) => (prevIndex ?? 0) - 1)
   }
 
-  const isPrevDisabled = currentIndex === 0
+  const isPrevDisabled = currentIndex === 0 || currentIndex === null
   const isNextDisabled = currentIndex === totalSlides - 1
 
   useEffect(() => {

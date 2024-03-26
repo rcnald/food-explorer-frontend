@@ -1,10 +1,16 @@
+import { SignInProps } from '../contexts/auth'
 import { isEmailValid } from '../lib/utils'
 import { DataProps, ValidationConfig } from '../types'
+import { useAuth } from './useAuth'
 import { useForm } from './useForm'
 
 type LoginProps = 'email' | 'password'
 
 export function useLogin() {
+  const { signIn } = useAuth() as {
+    signIn: (params: SignInProps) => Promise<void>
+  }
+
   const initialData: DataProps<LoginProps> = {
     user: {
       email: '',
@@ -16,7 +22,7 @@ export function useLogin() {
     },
   }
 
-  const validations: ValidationConfig<LoginProps> = {
+  const validation: ValidationConfig<LoginProps> = {
     email: {
       validations: [
         {
@@ -39,5 +45,20 @@ export function useLogin() {
 
   const validateFields: LoginProps[] = ['email', 'password']
 
-  return useForm(initialData, validations, validateFields)
+  const { data, handleChange, handleSubmit, validations, formRef } = useForm(
+    initialData,
+    validation,
+    validateFields,
+  )
+
+  return {
+    data,
+    handleChange,
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => {
+      handleSubmit(e)
+      signIn({ email: data.user.email, password: data.user.password })
+    },
+    validations,
+    formRef,
+  }
 }

@@ -5,12 +5,17 @@ export const Section = styled.section`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  overflow-x: hidden;
 
   > div {
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 
     ${({ theme }) => theme.UTILS.CONTAINER}
+
+    /* width:fit-content; */
+    
 
     > h1 {
       ${({ theme }) => theme.FONTS.POPPINS.MEDIUM.LG}
@@ -21,6 +26,7 @@ export const Section = styled.section`
     > div {
       display: flex;
       position: relative;
+      overflow-x: hidden;
 
       &::after,
       &::before {
@@ -49,10 +55,37 @@ export const Section = styled.section`
         right: 0;
       }
 
+      &:has(> div > div > span) {
+        & > button {
+          display: none;
+        }
+      }
+
       > div {
         display: flex;
         gap: 26px;
         overflow-x: auto;
+
+        &:has(> div > span) {
+          width: 100%;
+        }
+
+        > div {
+          &:has(> span) {
+            width: 100%;
+          }
+
+          > span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+            text-align: center;
+            color: ${({ theme }) => theme.COLORS.LIGHT[400]};
+            font-weight: bold;
+            width: 100%;
+          }
+        }
 
         &::-webkit-scrollbar {
           height: 8px;
