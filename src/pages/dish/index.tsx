@@ -8,6 +8,7 @@ import { Button, ButtonIcon } from '../../components/ui/button'
 import { Footer } from '../../components/ui/footer'
 import { Header } from '../../components/ui/header'
 import { Tag } from '../../components/ui/tag'
+import { formatCentsToCurrency } from '../../lib/utils'
 import { api } from '../../services/api'
 import * as Styled from './styles'
 
@@ -32,7 +33,7 @@ interface DishProps {
 
 export function Dish() {
   const { id } = useParams()
-  const [amount, setAmount] = useState(0)
+  const [amount, setAmount] = useState(1)
   const [dish, setDish] = useState<DishProps>()
 
   const handleIncrement = () => {
@@ -40,7 +41,7 @@ export function Dish() {
   }
 
   const handleDecrement = () => {
-    setAmount((prev) => (prev > 0 ? --prev : 0))
+    setAmount((prev) => (prev > 1 ? --prev : 1))
   }
 
   interface sexo {
@@ -88,7 +89,8 @@ export function Dish() {
               </div>
               <Button>
                 <ButtonIcon icon={PiReceipt} />
-                incluir &#xB7; R$ {dish?.price}
+                incluir &#xB7;{' '}
+                {formatCentsToCurrency((dish?.price ?? 0) * amount)}
               </Button>
             </div>
           </div>

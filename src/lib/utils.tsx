@@ -32,13 +32,18 @@ export const isEmailValid = (email: string) => {
 }
 
 export const formatCentsToCurrency = (value: number) => {
-  value *= 100
+  value /= 100
+
   const currency = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
   })
 
   return currency.format(value)
+}
+
+export const formatCurrencyTCents = (value: number) => {
+  return value * 100
 }
 
 export const formatToCurrency = (value: string) => {
