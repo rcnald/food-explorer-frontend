@@ -13,7 +13,7 @@ interface InputContentProps extends Omit<ComponentProps<'input'>, 'onChange'> {
   placeholder: string
   type: string
   validation?: ValidationFields
-  onChange: HandleChangeInputParams
+  onChange?: HandleChangeInputParams
   children?: React.ReactNode
 }
 
@@ -49,7 +49,7 @@ export function InputContent({
           placeholder={placeholder}
           type={type}
           onChange={(e) => {
-            onChange(e.target, validation)
+            if (onChange) onChange(e.target, validation)
           }}
           {...props}
         />

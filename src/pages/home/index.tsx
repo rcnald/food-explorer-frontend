@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
-import image from '../../assets/Mask group-1.png'
 import {
   Card,
   CardAction,
@@ -19,6 +18,8 @@ import {
   SectionTitle,
 } from '../../components/ui/section'
 import { useMenu } from '../../hooks/useMenu'
+import { formatCentsToCurrency } from '../../lib/utils'
+import { api } from '../../services/api'
 import * as Styled from './styles'
 
 export function Home() {
@@ -37,15 +38,18 @@ export function Home() {
             {meals?.length ? (
               meals.map((meal) => {
                 return (
-                  <Card key={meal.id}>
+                  <Card key={meal.id} id={meal.id.toString()}>
                     <CardAction
                       isToggle={true}
                       icons={{ regular: FaRegHeart, toggled: FaHeart }}
                     />
-                    <CardImage src={image} alt="DADA" />
+                    <CardImage
+                      src={`${api.defaults.baseURL}/files/${meal?.photo}`}
+                      alt="DADA"
+                    />
                     <CardTitle>{meal.name}</CardTitle>
                     <CardDescription>{meal.description}</CardDescription>
-                    <CardPrice>25.97</CardPrice>
+                    <CardPrice>{formatCentsToCurrency(meal.price)}</CardPrice>
                     <CardControls />
                   </Card>
                 )
@@ -61,15 +65,20 @@ export function Home() {
             {desserts?.length ? (
               desserts.map((dessert) => {
                 return (
-                  <Card key={dessert.id}>
+                  <Card key={dessert.id} id={dessert.id.toString()}>
                     <CardAction
                       isToggle={true}
                       icons={{ regular: FaRegHeart, toggled: FaHeart }}
                     />
-                    <CardImage src={image} alt="DADA" />
+                    <CardImage
+                      src={`${api.defaults.baseURL}/files/${dessert?.photo}`}
+                      alt="DADA"
+                    />
                     <CardTitle>{dessert.name}</CardTitle>
                     <CardDescription>{dessert.description}</CardDescription>
-                    <CardPrice>25.97</CardPrice>
+                    <CardPrice>
+                      {formatCentsToCurrency(dessert.price)}
+                    </CardPrice>
                     <CardControls />
                   </Card>
                 )
@@ -85,15 +94,18 @@ export function Home() {
             {drinks?.length ? (
               drinks.map((drink) => {
                 return (
-                  <Card key={drink.id}>
+                  <Card key={drink.id} id={drink.id.toString()}>
                     <CardAction
                       isToggle={true}
                       icons={{ regular: FaRegHeart, toggled: FaHeart }}
                     />
-                    <CardImage src={image} alt="DADA" />
+                    <CardImage
+                      src={`${api.defaults.baseURL}/files/${drink?.photo}`}
+                      alt="DADA"
+                    />
                     <CardTitle>{drink.name}</CardTitle>
                     <CardDescription>{drink.description}</CardDescription>
-                    <CardPrice>25.97</CardPrice>
+                    <CardPrice>{formatCentsToCurrency(drink.price)}</CardPrice>
                     <CardControls />
                   </Card>
                 )

@@ -1,6 +1,7 @@
 import React, { ComponentProps, useState } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 
+import { Link } from 'react-router-dom'
 import { Button } from '../button'
 import * as Styled from './styles'
 
@@ -28,8 +29,12 @@ interface CardControls {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void
 }
 
-export function Card({ onClick, children }: Card) {
-  return <Styled.Card onClick={onClick}>{children}</Styled.Card>
+export function Card({ onClick, id, children }: Card) {
+  return (
+    <Link to={`/dish/${id}`}>
+      <Styled.Card onClick={onClick}>{children}</Styled.Card>
+    </Link>
+  )
 }
 
 export function CardAction({ isToggle, icons }: CardAction) {

@@ -1,16 +1,39 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { LuChevronLeft } from 'react-icons/lu'
 import { PiReceipt } from 'react-icons/pi'
-import imageSrc from '../../assets/Mask group-1.png'
+import { useParams } from 'react-router-dom'
 import { Button, ButtonIcon } from '../../components/ui/button'
+
 import { Footer } from '../../components/ui/footer'
 import { Header } from '../../components/ui/header'
 import { Tag } from '../../components/ui/tag'
+import { api } from '../../services/api'
 import * as Styled from './styles'
 
+interface DishProps {
+  id: number
+  name: string
+  description: string
+  photo: string
+  price: number
+  category: 'dessert' | 'drink' | 'meal'
+  ingredients: [
+    {
+      name: string
+      id: number
+    },
+    {
+      name: string
+      id: number
+    },
+  ]
+}
+
 export function Dish() {
+  const { id } = useParams()
   const [amount, setAmount] = useState(0)
+  const [dish, setDish] = useState<DishProps>()
 
   const handleIncrement = () => {
     setAmount((prev) => ++prev)
@@ -20,25 +43,38 @@ export function Dish() {
     setAmount((prev) => (prev > 0 ? --prev : 0))
   }
 
+  interface sexo {
+    dish: DishProps
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const dish = await api.get<sexo>(`/dish/${id}`)
+
+      setDish(dish.data.dish)
+    }
+
+    fetchData()
+  }, [id])
+
   return (
     <Styled.Dish>
       <Header />
       <main>
-        <Button variant="link">
+        <Button onClick={() => history.back()} variant="link">
           <ButtonIcon icon={LuChevronLeft}></ButtonIcon>
           Voltar
         </Button>
 
         <div>
-          <img src={imageSrc} alt="" />
+          <img src={`${api.defaults.baseURL}/files/${dish?.photo}`} alt="" />
           <div>
-            <h1>Salada Ravanello</h1>
-            <p>
-              Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-              O pão naan dá um toque especial.
-            </p>
+            <h1>{dish?.name}</h1>
+            <p>{dish?.description}</p>
             <ul>
-              <Tag>ingredients</Tag>
+              {dish?.ingredients.map((ingredient) => {
+                return <Tag key={ingredient.id}>{ingredient.name}</Tag>
+              })}
             </ul>
             <div>
               <div>
@@ -52,7 +88,7 @@ export function Dish() {
               </div>
               <Button>
                 <ButtonIcon icon={PiReceipt} />
-                incluir &#xB7; R$ 25,00
+                incluir &#xB7; R$ {dish?.price}
               </Button>
             </div>
           </div>

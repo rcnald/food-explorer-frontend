@@ -10,8 +10,8 @@ import { Logo } from '../logo'
 import * as Styled from './styles.ts'
 
 interface HeaderProps {
-  onChange: (e: HTMLInputElement | HTMLTextAreaElement) => void
-  value: string
+  onChange?: (e: HTMLInputElement | HTMLTextAreaElement) => void
+  value?: string
 }
 
 export function Header({ onChange, value }: HeaderProps) {
