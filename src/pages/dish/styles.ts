@@ -97,21 +97,22 @@ export const Dish = styled.div`
               text-align: center;
             }
           }
+          > a {
+            > button {
+              width: 100%;
+              padding: 12px 24px;
 
-          > button {
-            width: 100%;
-            padding: 12px 24px;
+              > svg {
+                font-size: 24px;
 
-            > svg {
-              font-size: 24px;
-
-              @media (min-width: ${({ theme }) => theme.BREAKPOINT.LG}) {
-                display: none;
+                @media (min-width: ${({ theme }) => theme.BREAKPOINT.LG}) {
+                  display: none;
+                }
               }
-            }
 
-            @media (min-width: ${({ theme }) => theme.BREAKPOINT.XS}) {
-              width: fit-content;
+              @media (min-width: ${({ theme }) => theme.BREAKPOINT.XS}) {
+                width: fit-content;
+              }
             }
           }
         }

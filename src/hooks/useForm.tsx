@@ -120,7 +120,7 @@ export function useForm<T extends string>(
 
     const isInputsValid = validateInputs(data, validateInputsFields)
 
-    if (!isInputsValid) console.log('ruim')
+    if (!isInputsValid) alert('campos vazios')
   }
 
   const handleChange: HandleChangeInputParams = (input, validations) => {
@@ -172,5 +172,6 @@ export function useForm<T extends string>(
     handleSubmit,
     validations,
     formRef,
+    setData,
   }
 }

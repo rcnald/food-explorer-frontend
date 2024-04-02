@@ -48,7 +48,7 @@ export function Add() {
     <Styled.Add>
       <Header />
       <main>
-        <Button variant="link">
+        <Button onClick={() => history.back()} variant="link">
           <ButtonIcon icon={LuChevronLeft} />
           Voltar
         </Button>
@@ -95,7 +95,11 @@ export function Add() {
               <Select
                 setSelect={setSelect}
                 label="Categoria"
-                options={['ae', 'ue']}
+                options={[
+                  { name: 'Refeição', value: 'meal' },
+                  { name: 'Bebida', value: 'drink' },
+                  { name: 'Sobremesa', value: 'dessert' },
+                ]}
               />
             </div>
             <div>

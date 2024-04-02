@@ -18,11 +18,51 @@ import {
   TextareaFeedback,
 } from '../../components/ui/textarea'
 
-import { useInsert } from '../../hooks/useInsert'
+import { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { useUpdate } from '../../hooks/useUpdate'
+import { formatToCurrency } from '../../lib/utils'
+import { api } from '../../services/api'
 import theme from '../../styles/theme'
 import * as Styled from './styles'
 
+interface DishProps {
+  id: number
+  name: string
+  description: string
+  photo: string
+  price: number
+  category: 'dessert' | 'drink' | 'meal'
+  ingredients: [
+    {
+      name: string
+      id: number
+    },
+    {
+      name: string
+      id: number
+    },
+  ]
+}
+
+interface ResponseDish {
+  dish: DishProps
+}
+
 export function Edit() {
+  const { id } = useParams()
+  const [dish, setDish] = useState<DishProps>()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const dish = await api.get<ResponseDish>(`/dish/${id}`)
+
+      setDish(dish.data.dish)
+    }
+
+    fetchData()
+  }, [id])
+
   const {
     form,
     handleAddIngredients,
@@ -31,7 +71,9 @@ export function Edit() {
     ingredientsValue,
     ingredients,
     setSelect,
-  } = useInsert({ name: 'seox', description: '', price: '' })
+    select,
+    setIngredients,
+  } = useUpdate()
 
   const {
     data,
@@ -40,21 +82,49 @@ export function Edit() {
     handleFileChange,
     validations,
     formRef,
+    setData,
   } = form
 
   const filePlaceHolder =
     data.image && data.image[0] ? data.image[0].name : 'Selecione imagem'
 
+  useEffect(() => {
+    setIngredients(dish?.ingredients.map((ingredient) => ingredient.name) ?? [])
+    setData({
+      user: {
+        name: dish?.name ?? '',
+        description: dish?.description ?? '',
+        price: formatToCurrency(dish?.price.toString() ?? '0'),
+        image: '',
+        id: dish?.id.toString() ?? '',
+      },
+      field: {
+        name: { message: '', valid: true },
+        description: { message: '', valid: true },
+        price: { message: '', valid: true },
+        image: { message: '', valid: true },
+        id: { message: '', valid: true },
+      },
+    })
+  }, [setData, dish, setIngredients])
+
+  console.log(select)
   return (
     <Styled.Add>
       <Header />
       <main>
-        <Button variant="link">
+        <Button onClick={() => history.back()} variant="link">
           <ButtonIcon icon={LuChevronLeft} />
           Voltar
         </Button>
 
-        <form action="" ref={formRef} onSubmit={handleSubmit} noValidate>
+        <form
+          action=""
+          id={id}
+          ref={formRef}
+          onSubmit={handleSubmit}
+          noValidate
+        >
           <fieldset>
             <legend>Adicionar prato</legend>
             <div>
@@ -92,12 +162,18 @@ export function Edit() {
                 />
                 <InputFeedback>{data.field.name.message}</InputFeedback>
               </Input>
-
-              <Select
-                setSelect={setSelect}
-                label="Categoria"
-                options={['ae', 'ue']}
-              />
+              {dish?.category ? (
+                <Select
+                  setSelect={setSelect}
+                  label="Categoria"
+                  value={dish.category}
+                  options={[
+                    { name: 'Refeição', value: 'meal' },
+                    { name: 'Bebida', value: 'drink' },
+                    { name: 'Sobremesa', value: 'dessert' },
+                  ]}
+                />
+              ) : null}
             </div>
             <div>
               <Styled.Tags>

@@ -3,6 +3,8 @@ import { IoMdExit } from 'react-icons/io'
 import { LuMenu, LuSearch, LuX } from 'react-icons/lu'
 
 import { PiReceipt } from 'react-icons/pi'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../../../hooks/useAuth.tsx'
 import theme from '../../../styles/theme'
 import { Button, ButtonIcon } from '../button'
 import { Input, InputContent, InputIcon } from '../input'
@@ -16,14 +18,27 @@ interface HeaderProps {
 
 export function Header({ onChange, value }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const { signOut, user } = useAuth() as {
+    signOut: () => void
+    user: {
+      email: string
+      favoriteDishesId: Array<number>
+      id: number
+      name: string
+      role: 'admin' | 'customer'
+    }
+  }
+
   return (
     <Styled.Header>
       <div>
         <Button variant="link" onClick={() => setIsMenuOpen((prev) => !prev)}>
           <ButtonIcon icon={isMenuOpen ? LuX : LuMenu}></ButtonIcon>
         </Button>
-
-        <Logo />
+        <Link to={'/'}>
+          <Logo isAdmin={user.role === 'admin'} />
+        </Link>
 
         <Styled.Container data-open={isMenuOpen}>
           <div>
@@ -39,12 +54,20 @@ export function Header({ onChange, value }: HeaderProps) {
               </InputContent>
             </Input>
 
-            <Styled.Receipt data-count="0">
-              <ButtonIcon icon={PiReceipt} />
-              <span>Pedidos({0})</span>
-            </Styled.Receipt>
+            <Link to={user.role === 'admin' ? '/dish/create' : '/'}>
+              <Styled.Receipt data-count="0" $isAdmin={user.role === 'admin'}>
+                {user.role === 'admin' ? (
+                  'Novo Prato'
+                ) : (
+                  <>
+                    <ButtonIcon icon={PiReceipt} />
+                    <span>Pedidos({0})</span>
+                  </>
+                )}
+              </Styled.Receipt>
+            </Link>
 
-            <Button variant="link">
+            <Button variant="link" onClick={signOut}>
               <ButtonIcon icon={IoMdExit} />
               <span>Sair</span>
             </Button>

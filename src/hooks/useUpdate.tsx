@@ -22,9 +22,10 @@ interface UseInsertProps {
   name: string
   description: string
   price: string
+  id: string
 }
 
-export function useInsert(PrevData?: UseInsertProps) {
+export function useUpdate(PrevData?: UseInsertProps) {
   const [select, setSelect] = useState('')
   const [ingredients, setIngredients] = useState<Array<string>>([])
   const [ingredientsValue, setIngredientsValue] = useState<string>('')
@@ -39,7 +40,7 @@ export function useInsert(PrevData?: UseInsertProps) {
       description: PrevData?.description ?? '',
       price: formatToCurrency(PrevData?.price ?? '0'),
       image: '',
-      id: '',
+      id: PrevData?.id ?? '',
     },
     field: {
       name: { message: '', valid: true },
@@ -102,13 +103,7 @@ export function useInsert(PrevData?: UseInsertProps) {
       ],
     },
     image: {
-      validations: [
-        {
-          validation: (files) => files.length > 0,
-          type: 'passive',
-          errorMessage: () => 'Adicione uma foto',
-        },
-      ],
+      validations: [],
     },
   }
 
@@ -151,7 +146,7 @@ export function useInsert(PrevData?: UseInsertProps) {
       handleSubmit: (e: React.FormEvent<HTMLFormElement>) => {
         handleSubmit(e)
         const formData = new FormData()
-        const placeFile = new File(['data'], 'triste.png', {
+        const placeFile = new File(['data'], '', {
           type: 'image/png',
         })
 
@@ -169,10 +164,11 @@ export function useInsert(PrevData?: UseInsertProps) {
         }
 
         api
-          .post('/dish', formData, { withCredentials: true })
-          .then((data) => {
+          .patch(`/dish/${data.user.id}/edit`, formData, {
+            withCredentials: true,
+          })
+          .then(() => {
             navigate('/')
-            console.log(data.data)
           })
           .catch((error) => {
             if (error.response?.status === 401) signOut()
@@ -188,6 +184,7 @@ export function useInsert(PrevData?: UseInsertProps) {
     handleIngredientChange,
     ingredientsValue,
     setSelect,
+    select,
     ingredients,
     setIngredients,
   }

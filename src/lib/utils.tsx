@@ -42,8 +42,11 @@ export const formatCentsToCurrency = (value: number) => {
   return currency.format(value)
 }
 
-export const formatCurrencyTCents = (value: number) => {
-  return value * 100
+export const formatCurrencyToCents = (value: string) => {
+  value = value.replace(/R\$./g, '')
+  value = value.replace(',', '.')
+
+  return Number(value) * 100
 }
 
 export const formatToCurrency = (value: string) => {

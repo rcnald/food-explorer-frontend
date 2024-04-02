@@ -10,22 +10,44 @@ import * as Styled from './styles'
 
 interface SelectProps extends ComponentProps<'button'> {
   label: string
-  // value: string
+  value?: string
   setSelect: Dispatch<SetStateAction<string>>
-  options: Array<string>
+  options: Array<{ name: string; value: string }>
 }
 
 interface SelectOptionProps extends ComponentProps<'li'> {
   children: React.ReactNode
 }
 
-export function Select({ setSelect, label, options, ...rest }: SelectProps) {
+export function Select({
+  setSelect,
+  label,
+  options,
+  value,
+  ...rest
+}: SelectProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [currentIndex, setCurrentIndex] = useState<number>(0)
+  const [currentIndex, setCurrentIndex] = useState<number>(
+    options.findIndex((option) => option.value === value) === -1
+      ? 0
+      : options.findIndex((option) => option.value === value),
+  )
+
+  console.log()
+
+  // useEffect(() => {
+  //   const index = options.findIndex((option) => option.value === value)
+  //   setCurrentIndex(index === -1 ? 0 : index)
+  // }, [value, options])
 
   useEffect(() => {
-    setSelect(options[currentIndex])
+    setSelect(options[currentIndex].value)
   }, [currentIndex, options, setSelect])
+
+  // useEffect(() => {
+  //   const index = options.findIndex((option) => option.value === value)
+  //   setSelect(options[index === -1 ? 0 : index].name)
+  // }, [setSelect, value, options])
 
   return (
     <Styled.Div>
@@ -38,26 +60,24 @@ export function Select({ setSelect, label, options, ...rest }: SelectProps) {
           e.preventDefault()
         }}
       >
-        {options[currentIndex]}
+        {options[currentIndex].name}
         <LuChevronDown />
       </button>
-      {isOpen ? (
+      {isOpen && (
         <ul>
-          {options.map((option, i) => {
-            return (
-              <SelectOption
-                onClick={() => {
-                  setCurrentIndex(i)
-                  setIsOpen((prev) => !prev)
-                }}
-                key={i}
-              >
-                {option}
-              </SelectOption>
-            )
-          })}
+          {options.map((option, i) => (
+            <SelectOption
+              onClick={() => {
+                setCurrentIndex(i)
+                setIsOpen((prev) => !prev)
+              }}
+              key={i}
+            >
+              {option.name}
+            </SelectOption>
+          ))}
         </ul>
-      ) : null}
+      )}
     </Styled.Div>
   )
 }

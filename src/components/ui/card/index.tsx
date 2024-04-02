@@ -1,8 +1,7 @@
-import React, { ComponentProps, useState } from 'react'
+import React, { ComponentProps, PropsWithChildren, useState } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 
 import { Link } from 'react-router-dom'
-import { Button } from '../button'
 import * as Styled from './styles'
 
 interface CardChildrenProps {
@@ -25,9 +24,7 @@ interface CardAction {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void
 }
 
-interface CardControls {
-  onClick?: (event: React.MouseEvent<HTMLElement>) => void
-}
+interface CardControls extends PropsWithChildren {}
 
 export function Card({ onClick, id, children }: Card) {
   return (
@@ -57,10 +54,14 @@ export function CardDescription({ children }: CardChildrenProps) {
 }
 
 export function CardPrice({ children }: CardChildrenProps) {
-  return <span>R$ {children}</span>
+  return <span>{children}</span>
 }
 
-export function CardControls({ onClick }: CardControls) {
+export function CardControls({ children }: CardControls) {
+  return <div>{children}</div>
+}
+
+export function CardQuantityControl() {
   const [count, setCount] = useState(0)
   return (
     <div>
@@ -73,7 +74,6 @@ export function CardControls({ onClick }: CardControls) {
           <FaPlus />
         </button>
       </div>
-      <Button onClick={onClick}>incluir</Button>
     </div>
   )
 }

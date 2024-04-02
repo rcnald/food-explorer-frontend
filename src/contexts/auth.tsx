@@ -42,25 +42,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
         success: string
       }>
       if (axiosError.response) {
-        // Erro de resposta HTTP
         const errorMessage = axiosError.response.data.message
         alert(errorMessage)
       } else {
-        // Erro de requisição Axios sem resposta
         alert('Erro de requisição')
       }
     } else {
-      // Outro tipo de erro
       alert('Erro genérico')
     }
   }
 
   async function signIn({ email, password }: SignInProps): Promise<void> {
     try {
-      const response = await api.post<SessionResponseProps>('/session', {
-        email,
-        password,
-      })
+      const response = await api.post<SessionResponseProps>(
+        '/session',
+        {
+          email,
+          password,
+        },
+        { withCredentials: true },
+      )
 
       const { user } = response.data
 
@@ -70,8 +71,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  function signOut() {
+    removeUser()
+  }
+
   return (
-    <AuthContext.Provider value={{ signIn, user }}>
+    <AuthContext.Provider value={{ signIn, user, signOut }}>
       {children}
     </AuthContext.Provider>
   )

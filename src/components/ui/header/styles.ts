@@ -78,7 +78,7 @@ export const Container = styled.div`
       }
     }
 
-    > button + button {
+    > a + button {
       display: none;
 
       @media (min-width: ${({ theme }) => theme.BREAKPOINT.MD}) {
@@ -129,7 +129,7 @@ export const Container = styled.div`
           display: flex;
           ${({ theme }) => theme.FONTS.POPPINS.MEDIUM.LG}
 
-          &:not(button + button) {
+          &:not(a + button) {
             display: none;
           }
         }
@@ -143,7 +143,7 @@ export const Container = styled.div`
   }
 `
 
-export const Receipt = styled(Button)`
+export const Receipt = styled(Button)<{ $isAdmin: boolean }>`
   ${({ theme }) => theme.FONTS.POPPINS.MEDIUM.SM}
   color: ${({ theme }) => theme.COLORS.LIGHT[100]};
   width: fit-content;
@@ -165,7 +165,7 @@ export const Receipt = styled(Button)`
       content: attr(data-count);
       background: ${({ theme }) => theme.COLORS.TINTS.TOMATO[200]};
       padding: 4px;
-      display: flex;
+      display: ${(props) => (props.$isAdmin ? 'none' : 'flex')};
       justify-content: center;
       align-items: center;
       border-radius: 50%;

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { FaMinus, FaPlus } from 'react-icons/fa'
 import { LuChevronLeft } from 'react-icons/lu'
-import { PiReceipt } from 'react-icons/pi'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Button, ButtonIcon } from '../../components/ui/button'
 
 import { Footer } from '../../components/ui/footer'
 import { Header } from '../../components/ui/header'
 import { Tag } from '../../components/ui/tag'
+import { useAuth } from '../../hooks/useAuth'
 import { formatCentsToCurrency } from '../../lib/utils'
 import { api } from '../../services/api'
 import * as Styled from './styles'
@@ -33,8 +33,17 @@ interface DishProps {
 
 export function Dish() {
   const { id } = useParams()
-  const [amount, setAmount] = useState(1)
   const [dish, setDish] = useState<DishProps>()
+  const [amount, setAmount] = useState(1)
+  const { user } = useAuth() as {
+    user: {
+      email: string
+      favoriteDishesId: Array<number>
+      id: number
+      name: string
+      role: 'admin' | 'customer'
+    }
+  }
 
   const handleIncrement = () => {
     setAmount((prev) => ++prev)
@@ -44,13 +53,13 @@ export function Dish() {
     setAmount((prev) => (prev > 1 ? --prev : 1))
   }
 
-  interface sexo {
+  interface ResponseDish {
     dish: DishProps
   }
 
   useEffect(() => {
     const fetchData = async () => {
-      const dish = await api.get<sexo>(`/dish/${id}`)
+      const dish = await api.get<ResponseDish>(`/dish/${id}`)
 
       setDish(dish.data.dish)
     }
@@ -78,20 +87,36 @@ export function Dish() {
               })}
             </ul>
             <div>
-              <div>
-                <button onClick={handleDecrement}>
-                  <FaMinus />
-                </button>
-                <span>{amount.toString().padStart(2, '0')}</span>
-                <button onClick={handleIncrement}>
-                  <FaPlus />
-                </button>
-              </div>
-              <Button>
-                <ButtonIcon icon={PiReceipt} />
-                incluir &#xB7;{' '}
-                {formatCentsToCurrency((dish?.price ?? 0) * amount)}
-              </Button>
+              {user.role !== 'admin' ? (
+                <div>
+                  <button onClick={handleDecrement}>
+                    <FaMinus />
+                  </button>
+                  <span>{amount.toString().padStart(2, '0')}</span>
+                  <button onClick={handleIncrement}>
+                    <FaPlus />
+                  </button>
+                </div>
+              ) : null}
+
+              <Link
+                to={
+                  user.role === 'admin'
+                    ? `/dish/${dish?.id}/edit`
+                    : `/dish/${dish?.id}`
+                }
+              >
+                <Button>
+                  {user.role === 'admin' ? (
+                    'Editar prato'
+                  ) : (
+                    <>
+                      incluir &#xB7;{' '}
+                      {formatCentsToCurrency((dish?.price ?? 0) * amount)}
+                    </>
+                  )}
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
