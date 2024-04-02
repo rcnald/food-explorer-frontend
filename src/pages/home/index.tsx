@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { LuPencil } from 'react-icons/lu'
 import { Link } from 'react-router-dom'
 import { Button } from '../../components/ui/button'
@@ -53,18 +52,14 @@ export function Home() {
               meals.map((meal) => {
                 return (
                   <Card key={meal.id} id={meal.id.toString()}>
-                    <Link
-                      to={user.role === 'admin' ? `/dish/${meal.id}/edit` : ''}
-                    >
-                      <CardAction
-                        isToggle={true}
-                        icons={
-                          user.role === 'admin'
-                            ? { regular: LuPencil }
-                            : { regular: FaRegHeart, toggled: FaHeart }
-                        }
-                      />
-                    </Link>
+                    {user.role === 'admin' ? (
+                      <Link to={`/dish/${meal.id}/edit`}>
+                        <CardAction
+                          isToggle={true}
+                          icons={{ regular: LuPencil }}
+                        />
+                      </Link>
+                    ) : null}
                     <CardImage
                       src={`${api.defaults.baseURL}/files/${meal?.photo}`}
                       alt="DADA"
@@ -93,20 +88,14 @@ export function Home() {
               desserts.map((dessert) => {
                 return (
                   <Card key={dessert.id} id={dessert.id.toString()}>
-                    <Link
-                      to={
-                        user.role === 'admin' ? `/dish/${dessert.id}/edit` : ''
-                      }
-                    >
-                      <CardAction
-                        isToggle={true}
-                        icons={
-                          user.role === 'admin'
-                            ? { regular: LuPencil }
-                            : { regular: FaRegHeart, toggled: FaHeart }
-                        }
-                      />
-                    </Link>
+                    {user.role === 'admin' ? (
+                      <Link to={`/dish/${dessert.id}/edit`}>
+                        <CardAction
+                          isToggle={true}
+                          icons={{ regular: LuPencil }}
+                        />
+                      </Link>
+                    ) : null}
                     <CardImage
                       src={`${api.defaults.baseURL}/files/${dessert?.photo}`}
                       alt="DADA"
@@ -137,18 +126,14 @@ export function Home() {
               drinks.map((drink) => {
                 return (
                   <Card key={drink.id} id={drink.id.toString()}>
-                    <Link
-                      to={user.role === 'admin' ? `/dish/${drink.id}/edit` : ''}
-                    >
-                      <CardAction
-                        isToggle={true}
-                        icons={
-                          user.role === 'admin'
-                            ? { regular: LuPencil }
-                            : { regular: FaRegHeart, toggled: FaHeart }
-                        }
-                      />
-                    </Link>
+                    {user.role === 'admin' ? (
+                      <Link to={`/dish/${drink.id}/edit`}>
+                        <CardAction
+                          isToggle={true}
+                          icons={{ regular: LuPencil }}
+                        />
+                      </Link>
+                    ) : null}
                     <CardImage
                       src={`${api.defaults.baseURL}/files/${drink?.photo}`}
                       alt="DADA"

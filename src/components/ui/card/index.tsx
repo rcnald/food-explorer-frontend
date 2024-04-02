@@ -65,15 +65,13 @@ export function CardQuantityControl() {
   const [count, setCount] = useState(0)
   return (
     <div>
-      <div>
-        <button onClick={() => setCount((prev) => (prev > 0 ? --prev : 0))}>
-          <FaMinus />
-        </button>
-        <span>{count.toString().padStart(2, '0')}</span>
-        <button onClick={() => setCount((prev) => ++prev)}>
-          <FaPlus />
-        </button>
-      </div>
+      <button onClick={() => setCount((prev) => (prev > 0 ? --prev : 0))}>
+        <FaMinus />
+      </button>
+      <span>{count.toString().padStart(2, '0')}</span>
+      <button onClick={() => setCount((prev) => ++prev)}>
+        <FaPlus />
+      </button>
     </div>
   )
 }
