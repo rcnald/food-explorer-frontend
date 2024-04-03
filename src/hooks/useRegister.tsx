@@ -1,5 +1,8 @@
+import { useNavigate } from 'react-router-dom'
+import { RegistersProps } from '../contexts/auth'
 import { isEmailValid } from '../lib/utils'
 import { DataProps, ValidationConfig } from '../types'
+import { useAuth } from './useAuth'
 
 import { useForm } from './useForm'
 
@@ -20,8 +23,12 @@ export function useRegister() {
       confirmPassword: { message: '', valid: true },
     },
   }
+  const navigate = useNavigate()
+  const { register } = useAuth() as {
+    register: (params: RegistersProps) => Promise<void>
+  }
 
-  const validations: ValidationConfig<RegisterProps> = {
+  const validation: ValidationConfig<RegisterProps> = {
     name: {
       validations: [
         {
@@ -78,5 +85,25 @@ export function useRegister() {
     'confirmPassword',
   ]
 
-  return useForm(initialData, validations, validateFields)
+  const { data, handleChange, handleSubmit, validations, formRef } = useForm(
+    initialData,
+    validation,
+    validateFields,
+  )
+
+  return {
+    data,
+    handleChange,
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => {
+      handleSubmit(e)
+      register({
+        name: data.user.name,
+        email: data.user.email,
+        password: data.user.password,
+      })
+      navigate('/login')
+    },
+    validations,
+    formRef,
+  }
 }

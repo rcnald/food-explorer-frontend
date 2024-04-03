@@ -168,6 +168,7 @@ export function useUpdate(PrevData?: UseInsertProps) {
             withCredentials: true,
           })
           .then(() => {
+            alert('prato salvo')
             navigate('/')
           })
           .catch((error) => {
@@ -184,7 +185,6 @@ export function useUpdate(PrevData?: UseInsertProps) {
     handleIngredientChange,
     ingredientsValue,
     setSelect,
-    select,
     ingredients,
     setIngredients,
   }

@@ -1,4 +1,5 @@
 import { LuCheck, LuXCircle } from 'react-icons/lu'
+import { Link } from 'react-router-dom'
 import { Button } from '../../components/ui/button'
 import {
   Input,
@@ -68,7 +69,9 @@ export function SignIn() {
         </fieldset>
 
         <Button>Entrar</Button>
-        <Button variant="link">Criar uma conta</Button>
+        <Link to={'/register'}>
+          <Button variant="link">Criar uma conta</Button>
+        </Link>
       </form>
     </Styled.Main>
   )

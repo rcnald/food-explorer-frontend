@@ -19,7 +19,7 @@ import {
 } from '../../components/ui/textarea'
 
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdate } from '../../hooks/useUpdate'
 import { formatToCurrency } from '../../lib/utils'
 import { api } from '../../services/api'
@@ -51,7 +51,19 @@ interface ResponseDish {
 
 export function Edit() {
   const { id } = useParams()
+  const navigate = useNavigate()
   const [dish, setDish] = useState<DishProps>()
+
+  const handleDeleteDish = async (id: string | undefined) => {
+    if (id) {
+      await api
+        .delete(`/dish/${id}`, { withCredentials: true })
+        .then((data) => {
+          alert(data.data)
+          navigate('/')
+        })
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,7 +83,6 @@ export function Edit() {
     ingredientsValue,
     ingredients,
     setSelect,
-    select,
     setIngredients,
   } = useUpdate()
 
@@ -108,7 +119,6 @@ export function Edit() {
     })
   }, [setData, dish, setIngredients])
 
-  console.log(select)
   return (
     <Styled.Add>
       <Header />
@@ -237,7 +247,9 @@ export function Edit() {
             </Textarea>
           </fieldset>
           <div>
-            <Button type="button">Excluir</Button>
+            <Button type="button" onClick={() => handleDeleteDish(id)}>
+              Excluir
+            </Button>
             <Button type="submit">Salvar alterações</Button>
           </div>
         </form>

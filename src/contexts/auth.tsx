@@ -19,10 +19,21 @@ export interface SignInProps {
   password: string
 }
 
+export interface RegistersProps {
+  name: string
+  email: string
+  password: string
+}
+
 interface SessionResponseProps {
   message: string
   success: boolean
   user: UserResponseProps
+}
+
+interface UsersResponseProps {
+  message: string
+  success: boolean
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
@@ -70,13 +81,30 @@ export function AuthProvider({ children }: AuthProviderProps) {
       handleSignInError(error)
     }
   }
+  async function register({
+    name,
+    email,
+    password,
+  }: RegistersProps): Promise<void> {
+    try {
+      const response = await api.post<UsersResponseProps>('/users', {
+        name,
+        email,
+        password,
+      })
+
+      alert(response.data)
+    } catch (error) {
+      handleSignInError(error)
+    }
+  }
 
   function signOut() {
     removeUser()
   }
 
   return (
-    <AuthContext.Provider value={{ signIn, user, signOut }}>
+    <AuthContext.Provider value={{ signIn, user, signOut, register }}>
       {children}
     </AuthContext.Provider>
   )

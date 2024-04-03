@@ -170,9 +170,8 @@ export function useInsert(PrevData?: UseInsertProps) {
 
         api
           .post('/dish', formData, { withCredentials: true })
-          .then((data) => {
+          .then(() => {
             navigate('/')
-            console.log(data.data)
           })
           .catch((error) => {
             if (error.response?.status === 401) signOut()
