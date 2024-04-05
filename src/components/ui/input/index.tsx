@@ -49,6 +49,7 @@ export function InputContent({
           placeholder={placeholder}
           type={type}
           onChange={(e) => {
+            e.preventDefault()
             if (onChange) onChange(e.target, validation)
           }}
           {...props}

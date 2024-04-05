@@ -54,8 +54,8 @@ export function useLogin() {
   return {
     data,
     handleChange,
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => {
-      handleSubmit(e)
+    handleSubmit: () => {
+      handleSubmit()
       signIn({ email: data.user.email, password: data.user.password })
     },
     validations,

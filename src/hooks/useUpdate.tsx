@@ -143,8 +143,8 @@ export function useUpdate(PrevData?: UseInsertProps) {
     form: {
       data,
       handleChange,
-      handleSubmit: (e: React.FormEvent<HTMLFormElement>) => {
-        handleSubmit(e)
+      handleSubmit: () => {
+        handleSubmit()
         const formData = new FormData()
         const placeFile = new File(['data'], '', {
           type: 'image/png',

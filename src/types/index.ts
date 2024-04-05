@@ -41,10 +41,6 @@ export type HandleChangeInputParams = (
   validations?: ValidationFields,
 ) => void
 
-export type HandleFormSubmitParams = (
-  event: React.FormEvent<HTMLFormElement>,
-) => void
-
 export type ValidationConfig<T extends string> = {
   [key in T]: ValidationFields
 }

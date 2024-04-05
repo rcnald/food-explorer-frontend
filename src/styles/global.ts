@@ -215,7 +215,6 @@ select {
 */
 
 button,
-[type='button'],
 [type='reset'],
 [type='submit'] {
   -webkit-appearance: button;

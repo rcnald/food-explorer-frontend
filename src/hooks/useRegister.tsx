@@ -94,8 +94,8 @@ export function useRegister() {
   return {
     data,
     handleChange,
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => {
-      handleSubmit(e)
+    handleSubmit: () => {
+      handleSubmit()
       register({
         name: data.user.name,
         email: data.user.email,

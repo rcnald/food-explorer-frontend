@@ -31,7 +31,7 @@ export function Header({ onChange, value }: HeaderProps) {
   }
 
   return (
-    <Styled.Header>
+    <Styled.Header data-open={isMenuOpen}>
       <div>
         <Button variant="link" onClick={() => setIsMenuOpen((prev) => !prev)}>
           <ButtonIcon icon={isMenuOpen ? LuX : LuMenu}></ButtonIcon>
@@ -40,7 +40,10 @@ export function Header({ onChange, value }: HeaderProps) {
           <Logo isAdmin={user.role === 'admin'} />
         </Link>
 
-        <Styled.Container data-open={isMenuOpen}>
+        <Styled.Container
+          data-open={isMenuOpen}
+          $isAdmin={user.role === 'admin'}
+        >
           <div>
             <Input color={[theme.COLORS.LIGHT[500]]}>
               <InputContent
@@ -55,7 +58,11 @@ export function Header({ onChange, value }: HeaderProps) {
             </Input>
 
             <Link to={user.role === 'admin' ? '/dish/create' : '/'}>
-              <Styled.Receipt data-count="0" $isAdmin={user.role === 'admin'}>
+              <Styled.Receipt
+                data-open={isMenuOpen}
+                data-count="0"
+                $isAdmin={user.role === 'admin'}
+              >
                 {user.role === 'admin' ? (
                   'Novo Prato'
                 ) : (

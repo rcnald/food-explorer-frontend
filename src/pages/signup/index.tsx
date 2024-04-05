@@ -20,7 +20,14 @@ export function SignUp() {
     <Styled.Main>
       <Logo />
 
-      <form ref={formRef} onSubmit={handleSubmit} noValidate>
+      <form
+        ref={formRef}
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSubmit()
+        }}
+        noValidate
+      >
         <fieldset>
           <legend>Crie sua conta</legend>
           <Input

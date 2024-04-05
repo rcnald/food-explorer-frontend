@@ -53,7 +53,12 @@ export function Add() {
           Voltar
         </Button>
 
-        <form action="" ref={formRef} onSubmit={handleSubmit} noValidate>
+        <form
+          action=""
+          ref={formRef}
+          onSubmit={(e) => e.preventDefault()}
+          noValidate
+        >
           <fieldset>
             <legend>Adicionar prato</legend>
             <div>
@@ -93,6 +98,7 @@ export function Add() {
               </Input>
 
               <Select
+                type="button"
                 setSelect={setSelect}
                 label="Categoria"
                 options={[
@@ -119,6 +125,7 @@ export function Add() {
                     value={ingredientsValue}
                     onChange={handleIngredientChange}
                     variant="outline"
+                    onClick={handleAddIngredients}
                   >
                     <TagIcon icon={LuPlus} onClick={handleAddIngredients} />
                   </Tag>
@@ -163,7 +170,9 @@ export function Add() {
               </TextareaFeedback>
             </Textarea>
           </fieldset>
-          <Button>Salvar alterações</Button>
+          <Button type="button" onClick={() => handleSubmit()}>
+            Salvar alterações
+          </Button>
         </form>
       </main>
       <Footer />

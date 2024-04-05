@@ -15,6 +15,16 @@ export const Header = styled.header`
     justify-content: center;
   }
 
+  @media (max-width: ${({ theme }) => theme.BREAKPOINT.MD}) {
+    &[data-open='true'] {
+      > div {
+        > a {
+          display: none;
+        }
+      }
+    }
+  }
+
   > div {
     display: flex;
     justify-content: space-between;
@@ -60,7 +70,7 @@ export const Header = styled.header`
   }
 `
 
-export const Container = styled.div`
+export const Container = styled.div<{ $isAdmin: boolean }>`
   > div {
     display: flex;
     justify-content: space-between;
@@ -117,6 +127,10 @@ export const Container = styled.div`
         flex-direction: column;
         align-items: start;
 
+        > a {
+          display: ${(props) => (props.$isAdmin ? 'flex' : 'none')};
+        }
+
         > *:not(:first-child) {
           border-bottom: 1px solid ${({ theme }) => theme.COLORS.DARK[950]};
           width: 100%;
@@ -145,6 +159,7 @@ export const Container = styled.div`
 
 export const Receipt = styled(Button)<{ $isAdmin: boolean }>`
   ${({ theme }) => theme.FONTS.POPPINS.MEDIUM.SM}
+  display: ${(props) => (props.$isAdmin ? 'none' : 'flex')};
   color: ${({ theme }) => theme.COLORS.LIGHT[100]};
   width: fit-content;
   white-space: nowrap;
@@ -154,26 +169,43 @@ export const Receipt = styled(Button)<{ $isAdmin: boolean }>`
   grid-row-end: 3;
   padding-inline: 36px;
 
-  @media (max-width: ${({ theme }) => theme.BREAKPOINT.MD}) {
-    background: transparent;
-    padding: 0px;
+  &[data-open='true'] {
+    display: ${(props) => (props.$isAdmin ? 'flex' : 'none')};
+  }
+
+  &::after {
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM.SM}
+    content: attr(data-count);
+    background: ${({ theme }) => theme.COLORS.TINTS.TOMATO[200]};
+    padding: 4px;
+    display: ${(props) => (props.$isAdmin ? 'none' : 'flex')};
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
   }
 
   @media (max-width: ${({ theme }) => theme.BREAKPOINT.MD}) {
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM.LG}
+    background: transparent;
+    padding: 0px;
+
+    &:hover {
+      background: transparent;
+      text-decoration: underline;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.BREAKPOINT.MD}) {
+    display: flex;
+    ${({ theme }) => theme.FONTS.POPPINS.MEDIUM.LG}
+
     &::after {
-      ${({ theme }) => theme.FONTS.POPPINS.MEDIUM.SM}
-      content: attr(data-count);
-      background: ${({ theme }) => theme.COLORS.TINTS.TOMATO[200]};
-      padding: 4px;
-      display: ${(props) => (props.$isAdmin ? 'none' : 'flex')};
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      height: 16px;
-      width: 16px;
-      position: absolute;
-      top: -5px;
-      right: -5px;
+      display: none;
     }
   }
 

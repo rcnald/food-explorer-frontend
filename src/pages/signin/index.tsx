@@ -19,7 +19,14 @@ export function SignIn() {
     <Styled.Main>
       <Logo />
 
-      <form ref={formRef} onSubmit={handleSubmit} noValidate>
+      <form
+        ref={formRef}
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSubmit()
+        }}
+        noValidate
+      >
         <fieldset>
           <legend>Faça login</legend>
           <Input

@@ -132,7 +132,7 @@ export function Edit() {
           action=""
           id={id}
           ref={formRef}
-          onSubmit={handleSubmit}
+          onSubmit={(e) => e.preventDefault()}
           noValidate
         >
           <fieldset>
@@ -174,6 +174,7 @@ export function Edit() {
               </Input>
               {dish?.category ? (
                 <Select
+                  type="button"
                   setSelect={setSelect}
                   label="Categoria"
                   value={dish.category}
@@ -202,6 +203,7 @@ export function Edit() {
                     value={ingredientsValue}
                     onChange={handleIngredientChange}
                     variant="outline"
+                    onClick={handleAddIngredients}
                   >
                     <TagIcon icon={LuPlus} onClick={handleAddIngredients} />
                   </Tag>
@@ -250,7 +252,9 @@ export function Edit() {
             <Button type="button" onClick={() => handleDeleteDish(id)}>
               Excluir
             </Button>
-            <Button type="submit">Salvar alterações</Button>
+            <Button type="button" onClick={() => handleSubmit()}>
+              Salvar alterações
+            </Button>
           </div>
         </form>
       </main>

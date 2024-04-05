@@ -2,7 +2,6 @@ import { useRef, useState } from 'react'
 import {
   DataProps,
   HandleChangeInputParams,
-  HandleFormSubmitParams,
   HandleValidationParams,
   ValidateByTypeParams,
   ValidationConfig,
@@ -113,9 +112,7 @@ export function useForm<T extends string>(
     return { message, value }
   }
 
-  const handleSubmit: HandleFormSubmitParams = (e) => {
-    e.preventDefault()
-
+  const handleSubmit = () => {
     validateInputsToUser(formRef.current)
 
     const isInputsValid = validateInputs(data, validateInputsFields)

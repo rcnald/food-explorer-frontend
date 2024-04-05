@@ -33,21 +33,9 @@ export function Select({
       : options.findIndex((option) => option.value === value),
   )
 
-  console.log()
-
-  // useEffect(() => {
-  //   const index = options.findIndex((option) => option.value === value)
-  //   setCurrentIndex(index === -1 ? 0 : index)
-  // }, [value, options])
-
   useEffect(() => {
     setSelect(options[currentIndex].value)
   }, [currentIndex, options, setSelect])
-
-  // useEffect(() => {
-  //   const index = options.findIndex((option) => option.value === value)
-  //   setSelect(options[index === -1 ? 0 : index].name)
-  // }, [setSelect, value, options])
 
   return (
     <Styled.Div>

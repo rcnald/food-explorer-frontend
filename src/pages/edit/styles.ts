@@ -33,12 +33,18 @@ export const Add = styled.div`
         gap: 32px;
 
         > button {
-          &[type='submit'] {
+          &[type='button'] {
             background: ${({ theme }) => theme.COLORS.TINTS.TOMATO[400]};
+            &:hover {
+              filter: brightness(0.7);
+            }
           }
 
-          &[type='button'] {
+          &[type='button']:first-child {
             background: ${({ theme }) => theme.COLORS.DARK[800]};
+            &:hover {
+              filter: brightness(1.7);
+            }
           }
         }
       }
@@ -81,6 +87,7 @@ export const Tags = styled.div`
   }
   > div {
     display: flex;
+    flex-wrap: wrap;
     gap: 16px;
     height: min-content;
     padding: 8px;
