@@ -21,9 +21,10 @@ import {
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useUpdate } from '../../hooks/useUpdate'
-import { formatToCurrency } from '../../lib/utils'
+import { formatToCurrency, handleError, showAlert } from '../../lib/utils'
 import { api } from '../../services/api'
 import theme from '../../styles/theme'
+import { ResponseProps } from '../../types'
 import * as Styled from './styles'
 
 interface DishProps {
@@ -57,10 +58,15 @@ export function Edit() {
   const handleDeleteDish = async (id: string | undefined) => {
     if (id) {
       await api
-        .delete(`/dish/${id}`, { withCredentials: true })
-        .then((data) => {
-          alert(data.data)
+        .delete<ResponseProps>(`/dish/${id}`, { withCredentials: true })
+        .then((response) => {
+          const { message, status } = response.data
+          showAlert({ message, status })
           navigate('/')
+        })
+        .catch((error) => {
+          const { message, status } = handleError(error)
+          showAlert({ message, status })
         })
     }
   }

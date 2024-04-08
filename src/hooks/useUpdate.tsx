@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { formatCurrencyToCents, formatToCurrency } from '../lib/utils'
+import {
+  formatCurrencyToCents,
+  formatToCurrency,
+  showAlert,
+} from '../lib/utils'
 import { api } from '../services/api'
-import { DataProps, ValidationConfig } from '../types'
+import { DataProps, ResponseProps, ValidationConfig } from '../types'
 import { useAuth } from './useAuth'
 import { useForm } from './useForm'
 
@@ -109,9 +113,6 @@ export function useUpdate(PrevData?: UseInsertProps) {
 
   const validateFields: Array<InsertProps> = ['name', 'price', 'description']
 
-  // const filePlaceHolder =
-  //   data.image && data.image[0] ? data.image[0].name : 'Selecione imagem'
-
   const handleIngredientChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIngredientsValue(e.target.value)
   }
@@ -164,11 +165,12 @@ export function useUpdate(PrevData?: UseInsertProps) {
         }
 
         api
-          .patch(`/dish/${data.user.id}/edit`, formData, {
+          .patch<ResponseProps>(`/dish/${data.user.id}/edit`, formData, {
             withCredentials: true,
           })
-          .then(() => {
-            alert('prato salvo')
+          .then((response) => {
+            const { message, status } = response.data
+            showAlert({ message, status })
             navigate('/')
           })
           .catch((error) => {

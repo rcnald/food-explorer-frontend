@@ -1,7 +1,8 @@
-import { AxiosError } from 'axios'
 import { PropsWithChildren, createContext } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { handleError } from '../lib/utils'
 import { api } from '../services/api'
+import { ResponseProps } from '../types'
 
 export const AuthContext = createContext({})
 
@@ -10,7 +11,6 @@ interface AuthProviderProps extends PropsWithChildren {}
 interface UserResponseProps {
   name?: string
   email?: string
-  favorite_dishes_id?: Array<number>
   role?: 'customer' | 'admin'
 }
 
@@ -27,13 +27,8 @@ export interface RegistersProps {
 
 interface SessionResponseProps {
   message: string
-  success: boolean
+  status: 'error' | 'success'
   user: UserResponseProps
-}
-
-interface UsersResponseProps {
-  message: string
-  success: boolean
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
@@ -42,28 +37,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
     {},
   )
 
-  function isAxiosError(error: unknown): error is AxiosError {
-    return (error as AxiosError).isAxiosError !== undefined
-  }
-
-  function handleSignInError(error: unknown) {
-    if (isAxiosError(error)) {
-      const axiosError = error as AxiosError<{
-        message: string
-        success: string
-      }>
-      if (axiosError.response) {
-        const errorMessage = axiosError.response.data.message
-        alert(errorMessage)
-      } else {
-        alert('Erro de requisição')
-      }
-    } else {
-      alert('Erro genérico')
-    }
-  }
-
-  async function signIn({ email, password }: SignInProps): Promise<void> {
+  async function signIn({
+    email,
+    password,
+  }: SignInProps): Promise<ResponseProps> {
     try {
       const response = await api.post<SessionResponseProps>(
         '/session',
@@ -74,28 +51,32 @@ export function AuthProvider({ children }: AuthProviderProps) {
         { withCredentials: true },
       )
 
-      const { user } = response.data
+      const { user, message, status } = response.data
 
       setUser(user)
+      return { message, status }
     } catch (error) {
-      handleSignInError(error)
+      const { message, status } = handleError(error)
+      return { message, status }
     }
   }
   async function register({
     name,
     email,
     password,
-  }: RegistersProps): Promise<void> {
+  }: RegistersProps): Promise<ResponseProps> {
     try {
-      const response = await api.post<UsersResponseProps>('/users', {
+      const response = await api.post<ResponseProps>('/users', {
         name,
         email,
         password,
       })
+      const { message, status } = response.data
 
-      alert(response.data)
+      return { message, status }
     } catch (error) {
-      handleSignInError(error)
+      const { message, status } = handleError(error)
+      return { message, status }
     }
   }
 

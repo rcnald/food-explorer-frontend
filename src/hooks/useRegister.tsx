@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { RegistersProps } from '../contexts/auth'
-import { isEmailValid } from '../lib/utils'
-import { DataProps, ValidationConfig } from '../types'
+import { isEmailValid, showAlert } from '../lib/utils'
+import { DataProps, ResponseProps, ValidationConfig } from '../types'
 import { useAuth } from './useAuth'
 
 import { useForm } from './useForm'
@@ -25,7 +25,7 @@ export function useRegister() {
   }
   const navigate = useNavigate()
   const { register } = useAuth() as {
-    register: (params: RegistersProps) => Promise<void>
+    register: (params: RegistersProps) => Promise<ResponseProps>
   }
 
   const validation: ValidationConfig<RegisterProps> = {
@@ -94,14 +94,18 @@ export function useRegister() {
   return {
     data,
     handleChange,
-    handleSubmit: () => {
-      handleSubmit()
-      register({
-        name: data.user.name,
-        email: data.user.email,
-        password: data.user.password,
-      })
-      navigate('/login')
+    handleSubmit: async () => {
+      const { status: validationStatus } = handleSubmit()
+
+      if (validationStatus === 'success') {
+        const { message, status } = await register({
+          name: data.user.name,
+          email: data.user.email,
+          password: data.user.password,
+        })
+        showAlert({ message, status })
+        navigate('/login')
+      }
     },
     validations,
     formRef,

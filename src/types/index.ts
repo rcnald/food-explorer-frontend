@@ -9,6 +9,11 @@ export interface DataProps<T extends string> {
   image?: FileList | null
 }
 
+export interface ResponseProps {
+  message: string
+  status: 'error' | 'success'
+}
+
 export interface InputState {
   success: boolean | undefined
   message: string

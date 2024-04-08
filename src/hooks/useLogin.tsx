@@ -1,6 +1,6 @@
 import { SignInProps } from '../contexts/auth'
-import { isEmailValid } from '../lib/utils'
-import { DataProps, ValidationConfig } from '../types'
+import { isEmailValid, showAlert } from '../lib/utils'
+import { DataProps, ResponseProps, ValidationConfig } from '../types'
 import { useAuth } from './useAuth'
 import { useForm } from './useForm'
 
@@ -8,7 +8,7 @@ type LoginProps = 'email' | 'password'
 
 export function useLogin() {
   const { signIn } = useAuth() as {
-    signIn: (params: SignInProps) => Promise<void>
+    signIn: (params: SignInProps) => Promise<ResponseProps>
   }
 
   const initialData: DataProps<LoginProps> = {
@@ -54,9 +54,16 @@ export function useLogin() {
   return {
     data,
     handleChange,
-    handleSubmit: () => {
-      handleSubmit()
-      signIn({ email: data.user.email, password: data.user.password })
+    handleSubmit: async () => {
+      const { status: validationStatus } = handleSubmit()
+
+      if (validationStatus === 'success') {
+        const { message, status } = await signIn({
+          email: data.user.email,
+          password: data.user.password,
+        })
+        showAlert({ message, status })
+      }
     },
     validations,
     formRef,

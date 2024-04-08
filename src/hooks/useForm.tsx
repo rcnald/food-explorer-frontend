@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react'
+import { showAlert } from '../lib/utils'
 import {
   DataProps,
   HandleChangeInputParams,
@@ -116,8 +117,12 @@ export function useForm<T extends string>(
     validateInputsToUser(formRef.current)
 
     const isInputsValid = validateInputs(data, validateInputsFields)
+    if (!isInputsValid) {
+      showAlert({ message: 'Preencha os campos sinalizados!', status: 'error' })
+      return { status: 'error' }
+    }
 
-    if (!isInputsValid) alert('campos vazios')
+    return { status: 'success' }
   }
 
   const handleChange: HandleChangeInputParams = (input, validations) => {

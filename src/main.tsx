@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ThemeProvider } from 'styled-components'
+import { Alert } from './components/ui/alert'
 import { AuthProvider } from './contexts/auth.jsx'
 import { composeProviders } from './lib/utils'
 import { Routes } from './routes'
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Providers>
       <Global />
       <Routes />
+      <Alert className="alert" />
     </Providers>
   </React.StrictMode>,
 )

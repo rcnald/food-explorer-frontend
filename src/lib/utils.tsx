@@ -1,3 +1,6 @@
+import { AxiosError } from 'axios'
+import { ResponseProps } from '../types'
+
 type ProvidersType = [React.ElementType, Record<string, unknown>]
 
 type ComponentProps = {
@@ -58,4 +61,40 @@ export const formatToCurrency = (value: string) => {
   })
 
   return currency.format(Number(digits) / 100)
+}
+
+export function showAlert({
+  message,
+  status,
+}: {
+  message: string
+  status: 'error' | 'success'
+}) {
+  const alert = document.getElementsByClassName('alert')[0]
+
+  alert.classList.add(status)
+  alert.textContent = message
+  alert.classList.add('show')
+
+  setTimeout(() => {
+    alert.classList.remove('show')
+  }, 2000)
+}
+
+function isAxiosError(error: unknown): error is AxiosError {
+  return (error as AxiosError).isAxiosError !== undefined
+}
+
+export function handleError(error: unknown): ResponseProps {
+  if (isAxiosError(error)) {
+    const axiosError = error as AxiosError<ResponseProps>
+    if (axiosError.response) {
+      const { message, status } = axiosError.response.data
+      return { message, status }
+    } else {
+      return { message: 'Erro na requisição', status: 'error' }
+    }
+  } else {
+    return { message: 'Erro Genérico', status: 'error' }
+  }
 }
