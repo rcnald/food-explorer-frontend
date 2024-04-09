@@ -143,7 +143,7 @@ const theme: DefaultTheme = {
   BREAKPOINT: { XS: '425px', MD: '768px', LG: '1024px' },
   UTILS: {
     CONTAINER: css`
-      max-width: 1110px;
+      max-width: 1160px;
       width: 100%;
       padding: 0px 28px;
     `,
