@@ -77,6 +77,7 @@ export function showAlert({
   alert.classList.add('show')
 
   setTimeout(() => {
+    alert.classList.remove(status)
     alert.classList.remove('show')
   }, 2000)
 }
