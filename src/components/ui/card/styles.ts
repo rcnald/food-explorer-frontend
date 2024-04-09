@@ -14,6 +14,7 @@ export const Card = styled.article`
 
   @media (min-width: ${({ theme }) => theme.BREAKPOINT.MD}) {
     max-width: 300px;
+    min-width: 250px;
     width: 100%;
   }
 
