@@ -68,6 +68,7 @@ export const Tags = styled.div`
     display: flex;
     gap: 16px;
     height: min-content;
+    flex-wrap: wrap;
     padding: 8px;
     border-radius: 8px;
     background: ${({ theme }) => theme.COLORS.DARK[900]};
