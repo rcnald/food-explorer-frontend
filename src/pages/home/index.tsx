@@ -61,7 +61,7 @@ export function Home() {
                       </Link>
                     ) : null}
                     <CardImage
-                      src={`${api.defaults.baseURL}files/${meal?.photo}`}
+                      src={`${api.defaults.baseURL}/files/${meal?.photo}`}
                       alt="DADA"
                     />
                     <CardTitle>{meal.name}</CardTitle>
@@ -97,7 +97,7 @@ export function Home() {
                       </Link>
                     ) : null}
                     <CardImage
-                      src={`${api.defaults.baseURL}files/${dessert?.photo}`}
+                      src={`${api.defaults.baseURL}/files/${dessert?.photo}`}
                       alt="DADA"
                     />
                     <CardTitle>{dessert.name}</CardTitle>
@@ -135,7 +135,7 @@ export function Home() {
                       </Link>
                     ) : null}
                     <CardImage
-                      src={`${api.defaults.baseURL}files/${drink?.photo}`}
+                      src={`${api.defaults.baseURL}/files/${drink?.photo}`}
                       alt="DADA"
                     />
                     <CardTitle>{drink.name}</CardTitle>

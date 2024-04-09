@@ -77,7 +77,7 @@ export function Dish() {
         </Button>
 
         <div>
-          <img src={`${api.defaults.baseURL}files/${dish?.photo}`} alt="" />
+          <img src={`${api.defaults.baseURL}/files/${dish?.photo}`} alt="" />
           <div>
             <h1>{dish?.name}</h1>
             <p>{dish?.description}</p>
