@@ -150,7 +150,7 @@ export function useInsert(PrevData?: UseInsertProps) {
       data,
       handleChange,
       handleSubmit: () => {
-        handleSubmit()
+        const { status } = handleSubmit()
         const formData = new FormData()
         const placeFile = new File(['data'], 'triste.png', {
           type: 'image/png',
@@ -168,17 +168,18 @@ export function useInsert(PrevData?: UseInsertProps) {
         for (const prop in dish) {
           formData.append(prop, dish[prop])
         }
-
-        api
-          .post<ResponseProps>('/dish', formData, { withCredentials: true })
-          .then((response) => {
-            const { message, status } = response.data
-            showAlert({ message, status })
-            navigate('/')
-          })
-          .catch((error) => {
-            if (error.response?.status === 401) signOut()
-          })
+        if (status === 'success') {
+          api
+            .post<ResponseProps>('/dish', formData, { withCredentials: true })
+            .then((response) => {
+              const { message, status } = response.data
+              showAlert({ message, status })
+              navigate('/')
+            })
+            .catch((error) => {
+              if (error.response?.status === 401) signOut()
+            })
+        }
       },
       handleFileChange,
       validations,

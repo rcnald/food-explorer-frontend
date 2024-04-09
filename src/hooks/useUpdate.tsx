@@ -145,7 +145,7 @@ export function useUpdate(PrevData?: UseInsertProps) {
       data,
       handleChange,
       handleSubmit: () => {
-        handleSubmit()
+        const { status } = handleSubmit()
         const formData = new FormData()
         const placeFile = new File(['data'], '', {
           type: 'image/png',
@@ -163,19 +163,20 @@ export function useUpdate(PrevData?: UseInsertProps) {
         for (const prop in dish) {
           formData.append(prop, dish[prop])
         }
-
-        api
-          .patch<ResponseProps>(`/dish/${data.user.id}/edit`, formData, {
-            withCredentials: true,
-          })
-          .then((response) => {
-            const { message, status } = response.data
-            showAlert({ message, status })
-            navigate('/')
-          })
-          .catch((error) => {
-            if (error.response?.status === 401) signOut()
-          })
+        if (status === 'success') {
+          api
+            .patch<ResponseProps>(`/dish/${data.user.id}/edit`, formData, {
+              withCredentials: true,
+            })
+            .then((response) => {
+              const { message, status } = response.data
+              showAlert({ message, status })
+              navigate('/')
+            })
+            .catch((error) => {
+              if (error.response?.status === 401) signOut()
+            })
+        }
       },
       handleFileChange,
       validations,
