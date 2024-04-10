@@ -55,11 +55,11 @@ Antes de começar, certifique-se de ter o [Node.js](https://nodejs.org/) instala
 
 ## Tecnologias usadas
 Tecnologias e bibliotecas utilizadas para a construção do projeto. 
-- react
-- react-router-dom
-- typescript
-- axios
-- react-icons
-- styled-components
-- vite
-- jwt
+- [react](https://react.dev/)
+- [react-router-dom](https://reactrouter.com/en/main)
+- [typescript](https://www.typescriptlang.org/)
+- [axios](https://axios-http.com/docs/intro)
+- [react-icons](https://react-icons.github.io/react-icons/)
+- [styled-components](https://styled-components.com/)
+- [vite](https://vitejs.dev/guide/env-and-mode)
+- [jwt](https://jwt.io/)
